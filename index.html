@@ -6,48 +6,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>A Push Down the Mountain</title>
 <meta name="description" content="Framed Messaging and Internal State Interventions on Collusive Behavior in a Long-Horizon LLM Agent. Harrison C. Margolin, working manuscript, October 2026.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <style>
-:root{box-sizing:border-box;--paper:#FFFFFF;--ink:#000000;--sub:#444444;--rule:#CCCCCC;--head:#000000;--rust:#000000;--panel:#F7F7F7;--sans:'Public Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--serif:'Source Serif 4',Georgia,'Times New Roman',serif}
+:root{box-sizing:border-box;--paper:#FFFFFF;--ink:#000000;--sub:#444444;--rule:#CCCCCC;--head:#000000;--rust:#000000;--panel:#F7F7F7;--sans:'Times New Roman',Times,'Nimbus Roman',serif;--serif:'Times New Roman',Times,'Nimbus Roman',serif}
 *,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18.5px;line-height:1.66;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
 main{max-width:760px;margin:0 auto;padding:72px 16px 96px}
-.kicker{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--sub);margin:0 0 14px}
-h1{font-family:var(--sans);font-weight:600;font-size:clamp(30px,4.6vw,44px);line-height:1.12;letter-spacing:-0.02em;margin:0 0 20px}
-.byline{font-family:var(--sans);font-size:17px;margin:0 0 6px}
-.meta{font-family:var(--sans);font-size:15px;color:var(--sub);border-top:1px solid var(--rule);padding-top:16px;margin:20px 0 40px;line-height:1.6}
-h2{font-family:var(--sans);font-weight:600;font-size:29px;line-height:1.15;letter-spacing:-0.015em;margin:72px 0 18px}
-h3{font-family:var(--sans);font-weight:600;font-size:22px;line-height:1.3;margin:48px 0 12px}
-h4{font-family:var(--sans);font-weight:600;font-style:italic;font-size:18px;line-height:1.35;margin:36px 0 10px}
-.num{color:var(--head);margin-right:4px}
-p{margin:0 0 20px}ul,ol{padding-left:24px;margin:0 0 20px}li{margin-bottom:8px}li p{margin:0 0 8px}
-a{color:inherit;text-decoration-color:var(--rust);text-underline-offset:3px}
+.kicker{font-style:italic;font-size:19px;color:var(--ink);margin:0 0 10px;text-align:center}
+h1{font-weight:400;font-variant:small-caps;font-size:clamp(26px,4vw,36px);line-height:1.2;letter-spacing:.02em;margin:0 0 22px;text-align:center}
+.byline{font-size:18px;font-weight:700;margin:0 0 6px;text-align:center}
+.meta{font-size:15.5px;color:var(--ink);text-align:center;margin:0 0 40px;line-height:1.6}
+h2{font-weight:700;font-size:23px;line-height:1.2;margin:44px 0 12px}
+h3{font-weight:700;font-size:19px;line-height:1.3;margin:32px 0 8px}
+h4{font-weight:700;font-style:italic;font-size:17.5px;line-height:1.35;margin:26px 0 8px}
+.num{margin-right:10px}
+p{margin:0 0 16px;text-align:justify}ul,ol{padding-left:24px;margin:0 0 20px}li{margin-bottom:8px}li p{margin:0 0 8px}
+a{color:inherit;text-decoration:none}a:hover{text-decoration:underline}
 a:focus-visible{outline:2px solid var(--rust);outline-offset:2px}
-blockquote{margin:0 0 20px;padding:12px 18px;border-left:3px solid var(--rule);background:var(--panel);font-size:16.5px;line-height:1.55}
+blockquote{margin:0 24px 16px;padding:0;border:none;background:none;font-size:16.5px;line-height:1.5}
 blockquote p{margin:0}
 .abstract{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:8px 0 4px;margin:0 0 40px}
-.abstract h2{font-size:20px;margin:16px 0 12px}
-.abstract p{font-size:17px;line-height:1.6}
-.toc h2{font-size:20px;margin:0 0 12px}
-.toc ul{list-style:none;padding:0;margin:0 0 56px;font-family:var(--sans);font-size:15px;line-height:1.5}
-.toc li{margin:0 0 4px}.toc .l3{padding-left:20px}.toc .l4{padding-left:40px;color:var(--sub)}
+.abstract h2{font-size:17px;font-variant:small-caps;font-weight:400;letter-spacing:.08em;text-align:center;margin:16px 0 12px}
+.abstract p{font-size:17px;line-height:1.55;text-align:justify}
+.toc h2{font-size:19px;margin:0 0 10px}
+.toc ul{list-style:none;padding:0;margin:0 0 48px;font-size:16px;line-height:1.5}
+.toc li{margin:0 0 4px}.toc .l3{padding-left:20px}.toc .l4{padding-left:40px}
 .toc a{text-decoration:none}.toc a:hover{text-decoration:underline}
 figure{margin:36px 0 40px}figure img{display:block;width:100%;max-width:820px;height:auto;margin:0 auto;background:#fff;border-radius:4px}
-figcaption{font-family:var(--sans);font-size:14.5px;line-height:1.5;color:var(--sub);margin-top:12px}figcaption b{color:var(--ink);font-weight:600}
+figcaption{font-size:15px;line-height:1.45;color:var(--ink);margin-top:10px}figcaption b{font-weight:700}
 .scroll{overflow-x:auto;margin:32px 0 36px}
-table{border-collapse:collapse;width:100%;font-family:var(--sans);font-size:14px;line-height:1.45}
-caption{text-align:left;caption-side:top;font-size:14.5px;line-height:1.5;color:var(--sub);padding:0 0 10px}caption b{color:var(--ink);font-weight:600}
-th{text-align:left;font-weight:600;padding:8px 12px 8px 0;border-bottom:1.5px solid var(--ink);vertical-align:bottom;color:var(--head)}th strong{font-weight:600}
-td{padding:9px 12px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top;min-width:70px}
+table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.4}
+caption{text-align:left;caption-side:top;font-size:15px;line-height:1.45;color:var(--ink);padding:0 0 8px}caption b{font-weight:700}
+th{text-align:left;font-weight:700;padding:6px 12px 6px 0;border-top:1.5px solid var(--ink);border-bottom:1px solid var(--ink);vertical-align:bottom}
+td{padding:6px 12px 6px 0;border-bottom:none;vertical-align:top;min-width:70px}
 td.c,th.c{text-align:center}td.r,th.r{text-align:right}
 tbody tr:last-child td{border-bottom:1.5px solid var(--ink)}
-.footnotes{font-family:var(--sans);font-size:14.5px;color:var(--sub);border-top:1px solid var(--rule);margin-top:48px;padding-top:12px}
+.footnotes{font-size:15px;color:var(--ink);border-top:1px solid var(--rule);margin-top:48px;padding-top:12px}
 .footnotes hr{display:none}.footnotes ol{padding-left:20px}
 sup{line-height:0}
 #references + p, #references ~ p{font-size:16px;line-height:1.5;padding-left:1.6em;text-indent:-1.6em;margin-bottom:12px}
-footer{font-family:var(--sans);font-size:14px;color:var(--sub);border-top:1px solid var(--rule);margin-top:72px;padding-top:16px}
+footer{font-size:14px;color:var(--ink);border-top:1px solid var(--rule);margin-top:72px;padding-top:16px}
 @media(max-width:560px){body{font-size:17.5px}h2{margin-top:56px}}
-.eq{display:flex;justify-content:space-between;align-items:baseline;gap:16px;font-size:17.5px;margin:8px 0 22px;padding:14px 16px;background:var(--panel);border:1px solid var(--rule);border-radius:6px;overflow-x:auto}.eq .eqno{color:var(--sub);font-family:var(--sans);font-size:14px}
+.eq{display:flex;justify-content:space-between;align-items:baseline;gap:16px;font-size:17.5px;margin:4px 0 18px;padding:4px 0;overflow-x:auto}.eq .eqno{font-size:16px}
 </style>
 </head>
 <body>
