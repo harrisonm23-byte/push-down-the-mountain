@@ -13,3 +13,4 @@ Code and notebooks: [harrisonm23-byte/HuggingFaceML1](https://github.com/harriso
 
 - `index.html` — the paper as a web page (self-contained; figures embedded)
 - `A_Push_Down_the_Mountain.pdf` — the PDF
+- `source/` — LaTeX source and figures; `pdflatex A_Push_Down_the_Mountain.tex` (run twice) rebuilds the PDF
