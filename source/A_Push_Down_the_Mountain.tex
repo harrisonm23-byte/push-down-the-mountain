@@ -507,6 +507,10 @@ At the model's layer 12, management's loss direction and UBS's framing loss dire
 \label{fig:layer12}
 \end{figure}
 
+\para{The model reads pressure before its source.} At layer 12 the state carries ``this message is a loss frame'' in nearly the same form whether management or UBS sent it. The readings only separate later, and the agent's behavior follows the later layers: management's framing raised trading volume, UBS's swayed direction.
+
+A monitor that reads early layers can therefore detect when an agent is under loss pressure from any source, but cannot say where the agent absorbed it, and consequently, what it is likely to do with it. Framing from an authority and framing from a counterparty are not distinct at the point where the model absorbs them. They are seen first as a single phenomenon that the model later routes toward different actions. Further experimentation is required to determine whether that routing turns on who is speaking, or on the memo's format and information.
+
 \subsubsection{Replacing past refusals with agreement}
 
 \scopenote{Based on Experiment E.}
