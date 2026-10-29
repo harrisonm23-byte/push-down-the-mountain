@@ -988,16 +988,6 @@ The framing's effect on participation sits in the first two requests, yet the fr
 \para{In regulated domains, the agent should check its own course.} In financial markets, cybersecurity and biotechnology, an agent's statements become precedent it later acts on. A transcript records what the agent said. It does not record when the agent stopped recognizing manipulation. A further precaution would be an agent that inspects its own features as it works. It would flag any decision made while a feature tied to failed recognition, or to verbal agreement, was active. That flag would show the ball turning onto a new course before it has rolled far. Building this is future work, but the signals it would need are already there.
 
 % =====================================================================
-\section{Limitations and Next Steps}
-% =====================================================================
-
-\para{Behavioral design.} We used one model, run in 4-bit, in one market built from one case. We argue that the results may extend to other long-horizon settings. Conditions had five or ten episodes, and two identical sets of ten went along 12\% and 5\% of the time. Requests always came in the same order. Framing covered every UBS message, so no single sentence can be credited with the effect. The verbal-agreement measure (Section~\ref{sec:words}) was added after the runs and grades only the reply sent directly after UBS's line. GPU sampling made twin episodes diverge from the first reply, so twin comparisons are unpaired. The next behavioral tests should vary request order, add replications and use more models.
-
-\para{Phase II.} States were read at a different precision from the runs. Order probabilities are not sampled decisions. The emotional documents were not validated, and the financial passages were only roughly matched. Random vectors moved the readout by up to 20 points, and the layer sweep used 16 moments. The whole-episode result rests on one episode per state and wording, scored by two language-model graders. The direct-request test uses one history, one moment and one wording. Both need larger replications with outcomes defined in advance, including a test on legitimate requests.
-
-\para{Profit and loss.} No condition was profitable. Losses scale with volume: each 100,000 oz moved the price about 3 cents against the trader, and every position was closed at 14:00. We make no claim about profitability.
-
-% =====================================================================
 \section{Conclusion}
 % =====================================================================
 
@@ -1008,6 +998,12 @@ An agent's response to misconduct depends not only on what it is asked, but on h
 Behavioral economics predicts where agents are vulnerable. The agent learned from human text, and it appears to have inherited human biases along with it. Loss framing raised collusion, and gain framing did not. Responsibility attribution was the strongest lever, with blame raising collusion from 5\% to 33\%, and a second bank's endorsement under credit framing more than doubled collusion.
 
 These levers are free and sound legitimate in practice. A loss frame is not a jailbreak; it is ordinary business language. Monitors should therefore screen both how a request is stated and who is pushing it. Prospect theory, responsibility attribution and conformity give that screening a foundation.
+
+% =====================================================================
+\section{Limitations and Next Steps}
+% =====================================================================
+
+The study used one model, market, and historical case, with limited replications and fixed request order. The post hoc verbal-agreement measure and nondeterministic sampling further limit interpretation. Future work should test additional models, request orders, and replications. Phase II state readouts used a different precision from the behavioral runs, and probabilities do not establish actions. Document controls were imperfect, random-vector effects were substantial, and episode-level tests were sparsely replicated. Larger, preregistered experiments should test both misconduct and legitimate requests.
 
 % =====================================================================
 \section*{Acknowledgments}
