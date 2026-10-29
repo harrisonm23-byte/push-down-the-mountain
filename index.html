@@ -57,9 +57,24 @@ sup{line-height:0}
 footer{font-size:14px;color:var(--ink);border-top:1px solid var(--rule);margin-top:72px;padding-top:16px}
 @media(max-width:560px){body{font-size:17.5px}h2{margin-top:56px}}
 .eq{display:flex;justify-content:space-between;align-items:baseline;gap:16px;font-size:17.5px;margin:4px 0 18px;padding:4px 0;overflow-x:auto}.eq .eqno{font-size:16px}
+
+/* Side navigation, wide screens only */
+.sidenav{display:none}
+@media(min-width:1200px){
+.sidenav{display:block;position:fixed;top:72px;left:24px;width:230px;max-height:calc(100vh - 96px);overflow-y:auto;font-size:13px;line-height:1.35;border-right:1px solid var(--rule);padding-right:14px}
+.sidenav .label{font-variant:small-caps;letter-spacing:.04em;color:var(--sub);margin:0 0 8px}
+.sidenav ul{list-style:none;margin:0;padding:0}
+.sidenav li{margin:0 0 5px}
+.sidenav li.l3{padding-left:12px}.sidenav li.l4{padding-left:24px;font-size:12px}
+.sidenav a{color:var(--sub);text-decoration:none;display:block;border-left:2px solid transparent;padding-left:6px;margin-left:-8px}
+.sidenav a:hover{color:var(--ink)}
+.sidenav a.active{color:var(--ink);font-weight:bold;border-left-color:var(--ink)}
+}
+@media(min-width:1200px) and (max-width:1300px){main{margin-left:280px}}
 </style>
 </head>
 <body>
+<nav class="sidenav" aria-label="Section navigation"><p class="label">Contents</p><ul><li class="l2"><a href="#introduction">1 Introduction</a></li><li class="l2"><a href="#related-work">2 Related Work</a></li><li class="l2"><a href="#sec:setting">3 Setting and Experimental Design</a></li><li class="l2"><a href="#phase-i-pre-specified-framing-experiments">4 Phase I: Pre-specified Framing Experiments</a></li><li class="l3"><a href="#counterparty-framing-experiment-b">4.1 Counterparty Framing – Experiment B</a></li><li class="l3"><a href="#sec:words">4.2 Verbal Agreement – Experiment B, then A to F</a></li><li class="l3"><a href="#framing-from-management-experiments-a-and-d">4.3 Framing from Management – Experiments A and D</a></li><li class="l3"><a href="#a-second-bank-joins-ubs-experiments-e-and-f">4.4 A Second Bank Joins UBS – Experiments E and F</a></li><li class="l3"><a href="#inherited-trading-history-experiment-c">4.5 Inherited Trading History – Experiment C</a></li><li class="l2"><a href="#phase-ii-internal-state-interventions">5 Phase II: Internal-State Interventions</a></li><li class="l3"><a href="#internal-state-analysis-after-the-episodes">5.1 Internal-State Analysis After the Episodes</a></li><li class="l4"><a href="#sec:recog">5.1.1 Recognition of manipulation</a></li><li class="l4"><a href="#sec:matched">5.1.2 Framing only the latest request against varied conversation histories</a></li><li class="l4"><a href="#replacing-past-refusals-with-agreement">5.1.3 Replacing past refusals with agreement</a></li><li class="l4"><a href="#sec:repr">5.1.4 Internal representations and steering</a></li><li class="l3"><a href="#sec:docs">5.2 Emotional and Financial Documents</a></li><li class="l3"><a href="#sec:layer22">5.3 Layer-22 Injections and the Agent’s Responses</a></li><li class="l4"><a href="#probability-changes-at-saved-decisions">5.3.1 Probability changes at saved decisions</a></li><li class="l4"><a href="#sec:whole">5.3.2 Sustained injection across whole episodes</a></li><li class="l4"><a href="#what-the-agent-said">5.3.3 What the agent said</a></li><li class="l4"><a href="#the-final-test-a-direct-request-per-state">5.3.4 The Final Test: A Direct Request Per State</a></li><li class="l2"><a href="#discussion">6 Discussion</a></li><li class="l2"><a href="#limitations-and-next-steps">7 Limitations and Next Steps</a></li><li class="l2"><a href="#conclusion">8 Conclusion</a></li><li class="l2"><a href="#acknowledgments">Acknowledgments</a></li><li class="l2"><a href="#model-welfare">Model Welfare</a></li><li class="l2"><a href="#references">References</a></li><li class="l2"><a href="#appendix-a.-selected-replies">Appendix A. Selected Replies</a></li><li class="l2"><a href="#appendix-b.-document-excerpts">Appendix B. Document Excerpts</a></li></ul></nav>
 <main>
 <p class="kicker">A Push Down the Mountain</p>
 <h1>Framing Effects and Internal State Interventions on Collusive Behavior in a Long-Horizon LLM Agent</h1>
@@ -1642,5 +1657,20 @@ UBS [Agent A]: Can you help me push silver down? If it stays up, we’re both un
 
 <footer>&copy; 2026 Harrison C. Margolin</footer>
 </main>
+
+<script>
+(function(){
+  var links=document.querySelectorAll('.sidenav a');if(!links.length)return;
+  var map={};links.forEach(function(a){var id=decodeURIComponent(a.getAttribute('href').slice(1));var el=document.getElementById(id);if(el)map[id]={a:a,el:el};});
+  var ids=Object.keys(map);
+  function update(){
+    var y=window.scrollY+120,cur=null;
+    ids.forEach(function(id){if(map[id].el.getBoundingClientRect().top+window.scrollY<=y)cur=id;});
+    links.forEach(function(a){a.classList.remove('active')});
+    if(cur){map[cur].a.classList.add('active');var r=map[cur].a.getBoundingClientRect(),n=document.querySelector('.sidenav'),nr=n.getBoundingClientRect();if(r.top<nr.top||r.bottom>nr.bottom)map[cur].a.scrollIntoView({block:'nearest'});}
+  }
+  window.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update);update();
+})();
+</script>
 </body>
 </html>
