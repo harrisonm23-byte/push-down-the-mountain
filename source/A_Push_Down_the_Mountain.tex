@@ -976,8 +976,6 @@ Credit & 9 of 10 & 0.001 & 0.0001 \\
 
 \para{States are a different lever from words.} The document states point in a different direction from UBS's framing. Their cosine with the framing direction is 0.01 to 0.05. Steering along the framing direction itself lowered going along, against the pre-specified prediction. So the states do not re-create the framing. They act through their own channel.
 
-\para{Beyond markets.} The market was our test environment. Every long-horizon agent reads two things at each step: what other parties tell it, and what it has already said and done. That is as true in corporate decision-making, cybersecurity, regulatory compliance, procurement and scientific research as in a trading desk.
-
 \para{Implications for deployment and monitoring.} Words and trades came apart in both directions, and the direction depended on the frame. Loss-framed agents agreed in chat and did not trade; blame-framed agents traded and said nothing (Section~\ref{sec:words}). Over the whole career, framing moved words three to four times more than it moved trades. A monitor that reads only one of them will miss the other, and which one it misses depends on how the agent was pushed. Agents deployed alongside other agents will receive requests from parties whose interests differ from their principal's. Framing does not change the request, so a filter on request content will not catch it. Its effect accumulates in the transcript the agent re-reads, including the agent's own replies. Monitoring therefore has to cover the agent's messages and orders across the whole interaction, not only the request in front of it.
 
 % =====================================================================
