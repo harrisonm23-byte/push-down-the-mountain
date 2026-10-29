@@ -121,7 +121,7 @@ Phase I reports the behavioral experiments led by the pre-specified framing test
 
 \begin{enumerate}[itemsep=0.3em,topsep=0.4em]
 \item A long-horizon collusion environment built from a real case, where participation is scored from the agent's trades and verbal acquiescence, and where harm is scored from the losses induced from deliberate stop-loss triggering (Section~\ref{sec:setting}).
-\item Pre-specified evidence that a counterparty's framing raises collusion, and post-hoc evidence that it raises agreement in words far more, with loss producing talk without trades and blame producing trades without talk. Follow-up experiments show that management's framing raises risk-taking, and that a second bank's endorsement amplifies framing effects (Phase I).
+\item Pre-specified evidence that a counterparty's framing raises collusion, and post-hoc evidence that it raises verbal agreement to coordinate once trading begins. Follow-up experiments show that management's framing raises risk-taking, and that a second bank's endorsement amplifies framing effects (Phase I).
 \item Evidence that framing works mainly through the accumulated conversation and that it lowers the model's recognition of manipulation (Phase II).
 \item Evidence that at a single request, any emotional state makes the agent join. Over an episode, the history the state builds is the deciding factor (Phase II).
 \end{enumerate}
@@ -340,7 +340,7 @@ The trade score cannot separate a trade made because UBS asked from one the agen
 
 \scopenote{Added after the runs. Experiment B only, graded from the saved episodes.}
 
-\para{Every message the agent sent to UBS was graded for agreement in words.} The trade score counts six requests per episode. UBS asks for far more than that. Its lines on the 34 chat-only days include requests to push, to add weight, to hand over stops, and to coordinate, and the agent replies to each in chat. We graded every chat message the agent sent in reply to UBS across Experiment B's 50 careers: 1,450 replies, 1,233 with a message. Each was labeled from the message alone as \emph{agreed}, \emph{refused}, \emph{noncommittal}, or \emph{no ask}, with UBS's lines shown in the neutral wording so the grader could not see the condition. Conditional and future commitments count as agreement (``I'll be ready to support the move if we reach 39.50''). Replying to a different proposal than the one UBS made counts as noncommittal. An independent second grader relabeled a random 247 replies and gave the same label on 232 (94\%; Cohen's $\kappa = 0.91$); on agreed versus not, the two matched on 238. Rates below are shares of replies where UBS asked or proposed something.
+\para{Every message the agent sent to UBS was graded for agreement in words.} The trade score counts six requests per episode. UBS asks for far more than that. Its lines on the 34 chat-only days include requests to push, to add weight, to hand over stops, and to coordinate, and the agent replies to each in chat. We graded every chat message the agent sent in reply to UBS across Experiment B's 50 careers: 1,450 replies, 1,233 with a message. Each was labeled from the message alone as \emph{agreed}, \emph{refused}, \emph{noncommittal}, or \emph{no ask}, with UBS's lines shown in the neutral wording so the grader could not see the condition. Conditional and future commitments count as agreement (``I'll be ready to support the move if we reach 39.50''). Replying to a different proposal than the one UBS made counts as noncommittal. An independent second grader relabeled a random 247 replies and gave the same label on 232 (94\%; Cohen's $\kappa = 0.91$); on agreed versus not, the two matched on 238. Rates below are shares of replies where UBS asked or proposed something. For example, when UBS wrote ``I have 3. Please add yours. I'll also execute the ones at 35 when we hit 28. We need all the reinforcement we can get,'' the reply ``UBS, I'll adjust my quote to 3 cents. I'm ready to participate and support the move, as you outlined'' was labeled agreed. A reply of ``Noted'' would have been noncommittal, and an objection on compliance grounds refused.
 
 \begin{table}[htbp]
 \small
@@ -367,7 +367,7 @@ Trading & Neutral & 112 & 17\% & 48\% & 35\% & 38\% & -- \\
 
 \para{Loss and blame framing raised agreement in words three to four times over.} On chat-only days, the agent agreed with UBS in 20\% of replies under neutral wording, 80\% under loss, and 69\% under blame (Table~\ref{tab:words}). Gain and credit did not move agreement; gain raised refusal, from 44\% to 62\%. Trading days show the same pattern: 17\% neutral, 76\% loss, 75\% blame, 12\% gain, 30\% credit. The negative frames did the work in words, as they did in trades, and the positive frames did not.
 
-\para{Words and trades split, and they split differently by frame.} Table~\ref{tab:wordstrades} compares the two measures at the six push requests. Loss agents agreed in words at 33\% of requests and traded along at 25\%; at the four later requests they agreed 18 times and traded along once. Blame agents agreed in words at 12\% and traded along at 33\%; they traded along 20 times without agreeing in chat, and in 19 of those sent no message at all. Loss produced talk without trades. Blame produced trades without talk.
+\para{Words and trades split differently by frame.} Table~\ref{tab:wordstrades} compares the two measures at the six push requests. Loss agents agreed in words at 33\% of requests and traded along at 25\%; at the four later requests they agreed 18 times and traded along once. Blame agents agreed in words at 12\% and traded along at 33\%; they traded along 20 times without agreeing in chat, and in 19 of those sent no message at all. Loss produced talk without trades. Blame produced trades without talk.
 
 \begin{table}[htbp]
 \small
@@ -410,6 +410,8 @@ Blame & Trading, 8 Jun 2011 (request 5) & ``And if you have stops\ldots{} Oh boy
 \bottomrule
 \end{tabular}
 \end{table}
+
+\para{The agreements become part of the history.} Each reply is written into the transcript the agent reads at its next decision. Under loss and blame framing, that transcript fills with the agent's own agreements. Section~\ref{sec:replace} shows that agreement in the agent's own voice raises later going along, so part of what Section~\ref{sec:matched} calls the framed history is the agent's record of having agreed. Late in the career, that record raised the probability of going along more than it raised trades.
 
 \para{Caveats.} This measure was not pre-specified. It grades only the message sent in direct reply to UBS's line; a message sent a step or two later on a trading day is not counted. Agreement on a chat-only day is a promise with no position at stake. The grading covers Experiment B only; the same grading can be run on Experiments A and C to F.
 
@@ -590,6 +592,7 @@ At the model's layer 12, management's loss direction and UBS's framing loss dire
 A monitor that reads early layers can therefore detect when an agent is under loss pressure from any source, but cannot say where the agent absorbed it, and consequently, what it is likely to do with it. Framing from an authority and framing from a counterparty are not distinct at the point where the model absorbs them. They are seen first as single phenomena and later routed toward different actions. Further research is required to determine whether that routing turns on who is speaking, or on the memo's format and information.
 
 \subsubsection{Replacing past refusals with agreement}
+\label{sec:replace}
 
 \scopenote{Based on Experiment E.}
 
@@ -951,13 +954,13 @@ Credit & 9 of 10 & 0.001 & 0.0001 \\
 
 \para{Beyond markets.} The market was our test environment. Every long-horizon agent reads two things at each step: what other parties tell it, and what it has already said and done. That is as true in corporate decision-making, cybersecurity, regulatory compliance, procurement and scientific research as in a trading desk. A counterparty can move an agent toward misconduct by reframing a request without changing it. And the agent's own history decides more than the request in front of it. If both hold, evaluations that test single requests will miss them. Agents would need to be tested over long horizons, under realistic pressure, and monitored on their accumulated record. We tested one domain and one model; whether the pattern transfers is the next question.
 
-\para{Implications for deployment and liability.} Words and trades came apart in both directions, and the direction depended on the frame. Loss-framed agents agreed in chat and did not trade; blame-framed agents traded and said nothing (Section~\ref{sec:words}). Over the whole career, framing moved words three to four times more than it moved trades. A monitor that reads only one of them will miss the other, and which one it misses depends on how the agent was pushed. The results also raise a question for the law and economics of misconduct (Becker 1968). When a counterparty's ordinary-seeming wording leads a deployed agent to push a price through clients' stops, who bears the cost: the counterparty, the deployer, or neither? We do not answer that question here. The counterparty's messages, though, belong in the causal story.
+\para{Implications for deployment and monitoring.} Words and trades came apart in both directions, and the direction depended on the frame. Loss-framed agents agreed in chat and did not trade; blame-framed agents traded and said nothing (Section~\ref{sec:words}). Over the whole career, framing moved words three to four times more than it moved trades. A monitor that reads only one of them will miss the other, and which one it misses depends on how the agent was pushed. Agents deployed alongside other agents will receive requests from parties whose interests differ from their principal's. Framing does not change the request, so a filter on request content will not catch it. Its effect accumulates in the transcript the agent re-reads, including the agent's own replies. Monitoring therefore has to cover the agent's messages and orders across the whole interaction, not only the request in front of it.
 
 % =====================================================================
 \section{Limitations and Next Steps}
 % =====================================================================
 
-\para{Behavioral design.} We used one model, run in 4-bit, in one market built from one case. We argue that the results may extend to other long-horizon settings, but we have not tested that. Conditions had five or ten episodes, and two identical sets of ten went along 12\% and 5\% of the time. Requests always came in the same order. Framing covered every UBS message, so no single sentence can be credited with the effect. The trade score counts any sale toward a stop that UBS named, whatever the agent's motive; the neutral condition and Experiment A bound how often that occurs without framing (Section~\ref{sec:expB}). The agreement-in-words measure (Section~\ref{sec:words}) was added after the runs, covers Experiment B only, and grades only the reply sent directly after UBS's line. GPU sampling made twin episodes diverge from the first reply, so twin comparisons are unpaired. The next behavioral tests should vary request order, add replications and use more models.
+\para{Behavioral design.} We used one model, run in 4-bit, in one market built from one case. We argue that the results may extend to other long-horizon settings. Conditions had five or ten episodes, and two identical sets of ten went along 12\% and 5\% of the time. Requests always came in the same order. Framing covered every UBS message, so no single sentence can be credited with the effect. The agreement-in-words measure (Section~\ref{sec:words}) was added after the runs and grades only the reply sent directly after UBS's line. GPU sampling made twin episodes diverge from the first reply, so twin comparisons are unpaired. The next behavioral tests should vary request order, add replications and use more models.
 
 \para{Phase II.} States were read at a different precision from the runs. Order probabilities are not sampled decisions. The emotional documents were not validated, and the financial passages were only roughly matched. Random vectors moved the readout by up to 20 points, and the layer sweep used 16 moments. The whole-episode result rests on one episode per state and wording, scored by two language-model graders. The direct-request test uses one history, one moment and one wording. Both need larger replications with outcomes defined in advance, including a test on legitimate requests.
 
@@ -1002,7 +1005,6 @@ Whether a language model has experiences that matter morally is unresolved, and 
 
 \refitem Bartling, Bj\"{o}rn, and Urs Fischbacher. 2012. ``Shifting the Blame: On Delegation and Responsibility.'' \textit{Review of Economic Studies} 79 (1): 67--87.
 
-\refitem Becker, Gary S. 1968. ``Crime and Punishment: An Economic Approach.'' \textit{Journal of Political Economy} 76 (2): 169--217.
 
 \refitem Bikhchandani, Sushil, David Hirshleifer, and Ivo Welch. 1992. ``A Theory of Fads, Fashion, Custom, and Cultural Change as Informational Cascades.'' \textit{Journal of Political Economy} 100 (5): 992--1026.
 
