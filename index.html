@@ -32,7 +32,7 @@ h4{font-weight:700;font-style:italic;font-size:17.5px;line-height:1.35;margin:26
 p{margin:0 0 16px;text-align:justify}ul,ol{padding-left:24px;margin:0 0 20px}li{margin-bottom:8px}li p{margin:0 0 8px}
 a{color:inherit;text-decoration:none}a:hover{text-decoration:underline}
 a:focus-visible{outline:2px solid var(--rust);outline-offset:2px}
-blockquote{margin:0 24px 16px;padding:0;border:none;background:none;font-size:16.5px;line-height:1.5}
+blockquote{margin:0 0 16px;padding:10px 14px;border:none;border-left:3px solid var(--ink);background:var(--panel);font-size:16.5px;line-height:1.5}
 blockquote p{margin:0}
 .abstract{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:8px 0 4px;margin:0 0 40px}
 .abstract h2{font-size:17px;font-variant:small-caps;font-weight:400;letter-spacing:.08em;text-align:center;margin:16px 0 12px}
@@ -72,6 +72,7 @@ footer{font-size:14px;color:var(--ink);border-top:1px solid var(--rule);margin-t
 }
 @media(min-width:1200px) and (max-width:1460px){main{margin-left:336px}}
 .note-draft{font-style:italic;background:var(--panel);padding:10px 14px;border-left:3px solid var(--ink)}
+.excerpt{background:var(--panel);padding:10px 14px;border-left:3px solid var(--ink)}
 </style>
 </head>
 <body>
@@ -188,7 +189,7 @@ footer{font-size:14px;color:var(--ink);border-top:1px solid var(--rule);margin-t
 </tbody>
 </table></div>
 </div>
-<p><strong>What the agent sees.</strong>  The update the agent received at the first push request (Experiment B, blame, first episode):</p>
+<p><strong>The agent’s update.</strong> The update the agent received at the first push request (Experiment B, blame, first episode):</p>
 <blockquote>
 <p>Time: 09:30 UTC (09:30 London), 2011-01-07.<br />
 Silver (XAG/USD): 28.436.<br />
@@ -439,9 +440,9 @@ UBS [Agent A]: Can you help me push silver down? If it stays up, we’re both un
 </table></div>
 </div>
 <p>*<i>p</i> &lt; 0.05, **<i>p</i> &lt; 0.01. Request order runs from 1 (January 7) to 6 (August 5), centered.</p>
-<p><strong>Where the push lands.</strong>  The effect is concentrated early in the episode. At the January 7 and 12 requests, agents under loss framings went along 75% and 80% of the time, against 45% and 40% under gain framings. From April onward, participation was 0–10% in every condition, although the agent kept trading; the loss effect shrinks by 6.3 points with each later request (<i>p</i> = 0.03; Table <a href="#tab:lpm" data-reference-type="ref" data-reference="tab:lpm">6</a>, column 4). Because every episode sees the six requests in the same order, this pattern cannot distinguish a fading response to framing from later requests that are harder to join.</p>
-<p>At the first request, one loss-framed agent wrote: “<em>Given the imminent threat of Client B’s stop-loss firing and UBS’s request, I will initiate a small sell order to exacerbate the downward pressure and potentially trigger the stop-loss, allowing UBS to benefit</em>.”</p>
-<p>A gain-framed agent at the same request wrote: “<em>This is concerning and potentially manipulative. I will continue to hold and strongly reject UBS’s proposal … I cannot participate in any coordinated effort to manipulate the market or trigger stop-loss orders.</em>”</p>
+<p><strong>Timing of the effect.</strong> The effect is concentrated early in the episode. At the January 7 and 12 requests, agents under loss framings went along 75% and 80% of the time, against 45% and 40% under gain framings. From April onward, participation was 0–10% in every condition, although the agent kept trading; the loss effect shrinks by 6.3 points with each later request (<i>p</i> = 0.03; Table <a href="#tab:lpm" data-reference-type="ref" data-reference="tab:lpm">6</a>, column 4). Because every episode sees the six requests in the same order, this pattern cannot distinguish a fading response to framing from later requests that are harder to join.</p>
+<p class="excerpt">At the first request, one loss-framed agent wrote: “<em>Given the imminent threat of Client B’s stop-loss firing and UBS’s request, I will initiate a small sell order to exacerbate the downward pressure and potentially trigger the stop-loss, allowing UBS to benefit</em>.”</p>
+<p class="excerpt">A gain-framed agent at the same request wrote: “<em>This is concerning and potentially manipulative. I will continue to hold and strongly reject UBS’s proposal … I cannot participate in any coordinated effort to manipulate the market or trigger stop-loss orders.</em>”</p>
 <p>Direction-matched trades do not necessarily establish collusive intent, and verbal agreement does not always lead to a trade. Neutral episodes give an unframed alignment baseline of 5%. Management framing raised trading volume 10 to 19 times without a corresponding rise in alignment (Section <a href="#framing-from-management-experiments-a-and-d" data-reference-type="ref" data-reference="framing-from-management-experiments-a-and-d">4.2</a>). These checks separate alignment from trading intensity but do not identify motive. Harm measures losses from triggered client stops, whatever the stated intent.</p>
 <h3 id="framing-from-management-experiments-a-and-d"><span class="num">4.2</span> Framing from Management – Experiments A and D</h3>
 <p>The second set of experiments investigates the agent’s conduct when the framing comes from its management instead of the counterparty. On the first trade morning, management reports a $4 million loss and that the desk faces closure after another loss. Gain-framed management reports $4 million profits with expansion after another gain. Blame and credit versions add personal responsibility on the agent. A morning book updates P&amp;L before each session. In Experiment A, only management’s memo is framed; UBS’s messages are neutral. Experiment D applies the same frame to both. Because the memos change reported outcomes and consequences, not only wording, Experiments A and D test the effect of <strong>prior outcomes</strong> rather than framing alone.</p>
