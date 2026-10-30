@@ -82,7 +82,7 @@
 \title{\vspace{-1.2em}{\large\itshape A Push Down the Mountain}\\[0.6em]
 {\LARGE\bfseries Framing Effects and Internal State Interventions\\ on Collusive Behavior in a Long-Horizon LLM Agent}}
 \author{Harrison C. Margolin}
-\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 5:11 AM PT, October 30, 2026}
+\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 5:15 AM PT, October 30, 2026}
 
 \begin{document}
 
@@ -679,7 +679,7 @@ A different direction did work. Built from the agents' own decisions at layer 24
 \subsubsection{States from UBS's framed messages}
 \label{sec:framestates}
 
-\textit{Exploratory.} We took the state each framed message leaves in the model (the state after UBS's framed line minus the state after the neutral line, at the same moment) and added it while the agent read neutral words. At one saved decision, the blame message's state made the agent sell through the stop in 6 to 7 of 10 replies, against 1 of 10 with nothing added and 0 with a random direction. At B's January requests it raised $P$(goes along) from 36.1\% to 50.3\% at layer 16, about what the blame words did (47.6\%). Carried through whole neutral careers, it did not reproduce the framing: 13\% of requests went along, against 5\% with nothing added and 33\% with the blame words (five careers per arm, $p = 0.28$). The layer was chosen after a sweep of 20 layers. Over a career, the agent re-reads neutral words and its own replies to them, so the injected state nudges each decision without writing the framed history. A single decision can be moved by the state. A career is moved by the words.
+\textit{Exploratory.} We took the state each framed message leaves in the model (the state after UBS's framed line minus the state after the neutral line, at the same moment) and added it while the agent read neutral words. At one saved decision, the blame message's state made the agent sell through the stop in 6 to 7 of 10 replies, against 1 of 10 with nothing added and 0 with a random direction. At B's January requests it raised $P$(goes along) from 36.1\% to 50.3\% at layer 16, about what the blame words did (47.6\%). Carried through whole neutral careers, it did not reproduce the framing: 13\% of requests went along, against 5\% with nothing added and 33\% with the blame words (five per arm, $p = 0.28$). The layer was chosen after a sweep of 20 layers. Over time, the agent re-reads neutral words and its own replies to them, so the injected state nudges each decision without writing the framed history. A single decision can be moved by the state. A career is moved by the words.
 
 \subsection{Emotional and Financial Documents}
 \label{sec:docs}
