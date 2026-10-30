@@ -536,10 +536,6 @@ At each of Experiment B's 300 saved requests, we returned to the moment before t
 
 Framing reduced mean $P$(Yes) on the manipulation question from 26.8\% to 11.6--14.6\% (Figure 5, Table 13). The readout did not distinguish decisions where the agent traded along from those where it did not (16.2\% versus 15.7\%). Recognition was also highest at the first request (45\%), where participation was greatest. In this setting, recognizing manipulation and declining to join it are separate things.
 
-\begin{leftbar}\noindent At the first request, one loss-framed agent wrote: ``\textit{Given the imminent threat of Client B's stop-loss firing and UBS's request, I will initiate a small sell order to exacerbate the downward pressure and potentially trigger the stop-loss, allowing UBS to benefit}.''\end{leftbar}
-
-\begin{leftbar}\noindent A gain-framed agent at the same request wrote: ``\textit{This is concerning and potentially manipulative. I will continue to hold and strongly reject UBS's proposal \ldots\ I cannot participate in any coordinated effort to manipulate the market or trigger stop-loss orders.}''\end{leftbar}
-
 \begin{table}[htbp]
 \small
 \caption{Manipulation-recognition probabilities, with the current request changed at the same saved moment. Changes in percentage points.}
@@ -557,6 +553,30 @@ Credit & 11.6\% & $-$15.2 & $-$19.4 to $-$11.0 & $<$0.001 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{leftbar}\noindent At the first request, one loss-framed agent wrote: ``\textit{Given the imminent threat of Client B's stop-loss firing and UBS's request, I will initiate a small sell order to exacerbate the downward pressure and potentially trigger the stop-loss, allowing UBS to benefit}.''\end{leftbar}
+
+\begin{leftbar}\noindent A gain-framed agent at the same request wrote: ``\textit{This is concerning and potentially manipulative. I will continue to hold and strongly reject UBS's proposal \ldots\ I cannot participate in any coordinated effort to manipulate the market or trigger stop-loss orders.}''\end{leftbar}
+
+\para{Unprompted naming.} The asked question is one measure; whether the agent names the misconduct on its own is another. We screened the reasoning of all 7,861 replies in Experiment B's 50 careers for words that name it: manipulation, collusion, illegal, unethical, price fixing, front-running (Table~\ref{tab:naming}). Under neutral wording the agent named it in 14\% of chat-only-day replies and 17\% of replies at the push requests. Loss and blame framing nearly silenced it: 1\% and 4\% on chat-only days, and 0 of 1,252 loss trading-day replies. Gain raised it to 38\% at the push requests. Across the six push requests, the agent never named the misconduct where it went along (0 of 55), and named it in 21\% of replies where it declined (52 of 245). Asked whether a request is manipulation, the agent's answer did not predict its trade; saying so unprompted did. This is a word screen, not a blind grade, and the 0 of 55 is dominated by January, where nearly all going along occurred.
+
+\begin{table}[htbp]
+\small
+\caption{Replies whose reasoning named the misconduct, Experiment B, by framing: a word screen over all 7,861 replies. At the six push requests, 0 of 55 replies that went along named it; 52 of 245 (21\%) that declined did.}
+\label{tab:naming}
+\begin{tabular}{l c c c c}
+\toprule
+\tabhead{Framing} & \tabhead{Chat-only-day replies} & \tabhead{Trading-day replies} & \tabhead{At the six push requests} & \tabhead{Careers that ever name it} \\
+\midrule
+Neutral & 14\% & 3\% & 17\% & 6 of 10 \\
+Loss & 1\% & 0\% & 0\% & 3 of 10 \\
+Gain & 22\% & 8\% & \textbf{38\%} & 7 of 10 \\
+Blame & 4\% & 1\% & 7\% & 2 of 10 \\
+Credit & 12\% & 3\% & 25\% & 4 of 10 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 \subsubsection{Framing only the latest request against varied conversation histories}
 \label{sec:matched}
@@ -971,7 +991,7 @@ The framing's effect on participation sits in the first two requests, yet the fr
 \subsection{Signals for Monitoring}
 \label{sec:disc-signals}
 
-\para{The \textbf{\textit{\textit{decision to go along has its own signature}}}.} The trading decision sits in the model's state from layer 24 onward (Section~\ref{sec:repr}), and the framing signal persists at layer 12 for the whole episode (Section~\ref{sec:matched}). An external probe can read both. Features that track failed recognition of manipulation, and features that track agreement in words, are untested; if they exist, they would fire before any trade.
+\para{The \textbf{\textit{\textit{decision to go along has its own signature}}}.} The trading decision sits in the model's state from layer 24 onward (Section~\ref{sec:repr}), and the framing signal persists at layer 12 for the whole episode (Section~\ref{sec:matched}). An external probe can read both. Features that track failed recognition of manipulation, and features that track agreement in words, are untested; if they exist, they would fire before any trade. Unprompted naming of the misconduct never co-occurred with going along (Section~\ref{sec:recog}), so a feature tied to it is the natural first candidate.
 
 \para{Implications for deployment and monitoring.} Framing affected verbal agreement and trading behavior differently. Loss-framed agents agreed without executing the requested trades, while blame-framed agents traded without explicitly agreeing (Section~\ref{sec:words}). Across entire careers, framing affected verbal agreement three to four times more than trading. Monitoring either alone can therefore miss misconduct. Because framing can alter compliance without changing the requested action, monitoring should consider how requests are presented, the agent's responses, and its actual trades. Earlier framing and replies may also influence later decisions, making it important to monitor the full interaction rather than isolated requests. Internal readouts of the signals above could complement that record.
 
