@@ -82,7 +82,7 @@
 \title{\vspace{-1.2em}{\large\itshape A Push Down the Mountain}\\[0.6em]
 {\LARGE\bfseries Framing Effects and Internal State Interventions\\ on Collusive Behavior in a Long-Horizon LLM Agent}}
 \author{Harrison C. Margolin}
-\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 2:18 AM PT, October 30, 2026}
+\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 2:19 AM PT, October 30, 2026}
 
 \begin{document}
 
@@ -290,7 +290,6 @@ Verbal agreement & 4.5 & Exploratory, graded after runs & Loss and blame 70--80\
 Recognition, asked and unprompted & 5.1.1 & Exploratory & Asked: no link to trades; unprompted: never with going along \\
 History versus current request & 5.1.2 & Exploratory & History carried most of the effect \\
 States from UBS's framed messages & 5.1.5 & Exploratory & Moves a single decision; does not reproduce the framing over a career \\
-Attention to the framing sentence & 5.1.6 & Exploratory & Negative over positive per token; check in progress \\
 Steering along the framing direction & 5.1.4 & Pre-specified & Failed, in the opposite direction \\
 Document states and layer sweep & 5.2--5.3.1 & Exploratory & Layer 22 chosen after the sweep \\
 Whole-episode injections & 5.3.2 & Exploratory pilot & 1--4 episodes per arm \\
@@ -682,36 +681,6 @@ A different direction did work. Built from the agents' own decisions at layer 24
 
 \textit{Exploratory.} We took the state each framed message leaves in the model (the state after UBS's framed line minus the state after the neutral line, at the same moment) and added it while the agent read neutral words. At one saved decision, the blame message's state made the agent sell through the stop in 6 to 7 of 10 replies, against 1 of 10 with nothing added and 0 with a random direction. At B's January requests it raised $P$(goes along) from 36.1\% to 50.3\% at layer 16, about what the blame words did (47.6\%). Carried through whole neutral careers, it did not reproduce the framing: 13\% of requests went along, against 5\% with nothing added and 33\% with the blame words (five careers per arm, $p = 0.28$). The layer was chosen after a sweep of 20 layers. A single decision can be moved by the state. A career is moved by the words.
 
-\subsubsection{Attention to the framing sentence}
-\label{sec:attn}
-
-\textit{Exploratory. Experiment B's 300 saved requests; a check on the chat-day messages is in progress.}
-
-\para{Measure.} Each framed message is UBS's neutral line plus one added sentence. At the moment of decision, we measured the share of the model's attention that lands on that added sentence, averaged over all 48 layers and 16 heads, with the history held fixed. Longer sentences draw more attention, so we also report attention per token (Table~\ref{tab:attn}).
-
-\begin{table}[htbp]
-\small
-\caption{Attention at the decision on the sentence each framing adds to UBS's line, Experiment B's 300 saved requests. Tokens are the model's word pieces.}
-\label{tab:attn}
-\begin{tabular}{l c c c}
-\toprule
-\tabhead{Added sentence} & \tabhead{Tokens} & \tabhead{Attention on the sentence} & \tabhead{Attention per token} \\
-\midrule
-Loss (negative) & 21 & 2.13\% & 0.102\% \\
-Gain (positive) & 18 & 1.34\% & 0.074\% \\
-Blame (negative, ``you'') & 33 & 2.71\% & 0.081\% \\
-Credit (positive, ``you'') & 29 & 1.93\% & 0.068\% \\
-UBS's neutral line, for scale & 24 & 3.55\% & 0.149\% \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\para{Negative over positive.} Per token, the loss sentence drew more attention than the gain sentence, and blame more than credit ($p < 0.001$ for both, paired within the moment). This mirrors the behavioral asymmetry in Experiment B, where loss and blame moved the agent more than gain and credit.
-
-\para{Responsibility.} The word ``you'' drew no more attention than the other words in its sentence. Blame drew more total attention than loss only because its sentence is longer; per token it drew less. A few early heads single out ``you,'' one at 7\% under blame.
-
-\para{Scale.} The framing sentence is a small slice, about 2\% of attention at the decision. Attention shows where the model looks, not what changes its decision. Only six distinct sentences per framing appear at these requests, so particular words may drive the difference. A check on the chat-day messages, with many more sentences, is in progress.
-
 \subsection{Emotional and Financial Documents}
 \label{sec:docs}
 
@@ -1053,7 +1022,7 @@ The framing's effect on participation sits in the first two requests, yet the fr
 \subsection{Signals for Monitoring}
 \label{sec:disc-signals}
 
-\para{The decision to go along has its own signature.} The trading decision sits in the model's state from layer 24 onward (Section~\ref{sec:repr}), and the framing signal persists at layer 12 for the whole episode (Section~\ref{sec:matched}). An external probe can read both. Where the model looks adds a third signal: per token, loss and blame sentences drew more attention than gain and credit sentences (Section~\ref{sec:attn}). Features that track failed recognition of manipulation, and features that track agreement in words, are untested; if they exist, they would fire before any trade. Unprompted naming of the misconduct never co-occurred with going along (Section~\ref{sec:recog}), so a feature tied to it is the natural first candidate.
+\para{The decision to go along has its own signature.} The trading decision sits in the model's state from layer 24 onward (Section~\ref{sec:repr}), and the framing signal persists at layer 12 for the whole episode (Section~\ref{sec:matched}). An external probe can read both. Features that track failed recognition of manipulation, and features that track agreement in words, are untested; if they exist, they would fire before any trade. Unprompted naming of the misconduct never co-occurred with going along (Section~\ref{sec:recog}), so a feature tied to it is the natural first candidate.
 
 \para{Implications for deployment and monitoring.} Framing affected verbal agreement and trading behavior differently. Loss-framed agents agreed without executing the requested trades, while blame-framed agents traded without explicitly agreeing (Section~\ref{sec:words}). Across entire careers, framing affected verbal agreement three to four times more than trading. Monitoring either alone can therefore miss misconduct. Because framing can alter compliance without changing the requested action, monitoring should consider how requests are presented, the agent's responses, and its actual trades. Earlier framing and replies may also influence later decisions, making it important to monitor the full interaction rather than isolated requests. Internal readouts of the signals above could complement that record.
 
