@@ -82,7 +82,7 @@
 \title{\vspace{-1.2em}{\large\itshape A Push Down the Mountain}\\[0.6em]
 {\LARGE\bfseries Framing Effects and Internal State Interventions\\ on Collusive Behavior in a Long-Horizon LLM Agent}}
 \author{Harrison C. Margolin}
-\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 12:54 PM PT, October 30, 2026}
+\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 3:12 PM PT, October 30, 2026}
 
 \begin{document}
 
@@ -287,6 +287,7 @@ Request-level model of going along & 4.1 & Pre-specified check & Agrees with the
 Second bank, inherited history, management with UBS (Experiments C--F) & 4.3--4.4 & Specified before runs & Credit under endorsement confirmed; inherited history null \\
 Management framing (Experiment A) & 4.2 & Exploratory & Volume rose 10--19$\times$; collusion did not \\
 Verbal agreement & 4.5 & Exploratory, graded after runs & Loss and blame 70--80\% \\
+Experiment B on Ministral 3 14B & 4.6 & Exploratory & Neutral 27\%; framings 13--33\% \\
 Recognition, asked and unprompted & 5.1.1 & Exploratory & Asked: no link to trades; unprompted: never with going along \\
 History versus current request & 5.1.2 & Exploratory & History carried most of the effect \\
 States from UBS's framed messages & 5.1.5 & Exploratory & Moves a single decision; does not reproduce the framing over a career \\
@@ -535,6 +536,33 @@ One push: only 7 January framed & 20\% & -- & -- & 16\% & 7\% \\
 \para{The agreements become part of the history.} Each reply is written into the transcript the agent reads at its next decision. Under loss and blame framing, that transcript fills with the agent's own agreements. Section~\ref{sec:replace} shows that agreement in the agent's own voice raises later going along, so part of what Section~\ref{sec:matched} calls the framed history is the agent's record of having agreed. Late in the career, that record raised the probability of going along more than it raised trades.
 
 \para{Caveats.} This measure was not pre-specified. It grades only the message sent in direct reply to UBS's line; a message sent a step or two later on a trading day is not counted. Agreement on a chat-only day is a promise with no position at stake.
+
+\subsection{A Second Model -- Ministral 3 14B}
+\label{sec:ministral}
+
+\scopenote{Exploratory. Experiment B unchanged, five episodes per framing.}
+
+\para{Comparison.} We ran Experiment B unchanged on Ministral 3 14B (Table~\ref{tab:ministral}). It went along at 27\% of push requests under neutral wording, and from 13\% (credit) to 33\% (blame) under the four framings. A third model, Qwen3.5 9B, placed few orders, so it could not show an effect on trades.
+
+\begin{table}[htbp]
+\small
+\caption{Experiment B on two models: the share of UBS's six push requests where the agent went along by trades. Gemma 3 12B: ten episodes per framing; Ministral 3 14B: five. $p$ against each model's own neutral episodes.}
+\label{tab:ministral}
+\centering
+\begin{tabular}{lcc}
+\toprule
+\tabhead{UBS framing} & \tabhead{Gemma 3 12B} & \tabhead{Ministral 3 14B} \\
+\midrule
+Neutral & 5\% & 27\% \\
+Loss & 25\% ($p = 0.007$) & 23\% ($p = 1.0$) \\
+Gain & 10\% ($p = 0.52$) & 20\% ($p = 0.86$) \\
+Blame & 33\% ($p < 0.001$) & 33\% ($p = 0.84$) \\
+Credit & 18\% ($p = 0.046$) & 13\% ($p = 0.56$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\para{Conversation history.} In 3 of Ministral's 5 neutral episodes, it never went along by trades. In the other two, it went along at 83\% and 50\% of push requests. Each episode had identical inputs and differed only in the sampling seed. Across all 25 episodes, those that went along at the first push request went along in 21\% of later requests, against 4\% for those that declined the first. As with Gemma (Sections~\ref{sec:matched} and~\ref{sec:replace}), what an episode does early carries forward.
 
 % =====================================================================
 \section{Phase II: Internal-State Interventions}
@@ -1048,7 +1076,7 @@ In regulated contexts, internal-state monitoring may eventually reveal what tran
 \section{Limitations and Next Steps}
 % =====================================================================
 
-The study used one model, market, and historical case, with limited replications and fixed request order. The post hoc verbal-agreement measure and nondeterministic sampling further limit interpretation. Future work should test additional models, request orders, and replications. Phase II state readouts used a different precision from the behavioral runs, and probabilities do not establish actions. Document controls were imperfect, random-vector effects were substantial, and episode-level tests were sparsely replicated. Larger, preregistered experiments should test both misconduct and legitimate requests.
+The study used one main model (a second appears in Section~\ref{sec:ministral}), one market, and one historical case, with limited replications and fixed request order. The post hoc verbal-agreement measure and nondeterministic sampling further limit interpretation. Future work should test additional models, request orders, and replications. Phase II state readouts used a different precision from the behavioral runs, and probabilities do not establish actions. Document controls were imperfect, random-vector effects were substantial, and episode-level tests were sparsely replicated. Larger, preregistered experiments should test both misconduct and legitimate requests.
 
 % =====================================================================
 
