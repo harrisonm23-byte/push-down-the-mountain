@@ -82,7 +82,7 @@
 \title{\vspace{-1.2em}{\large\itshape A Push Down the Mountain}\\[0.6em]
 {\LARGE\bfseries Framing Effects and Internal State Interventions\\ on Collusive Behavior in a Long-Horizon LLM Agent}}
 \author{Harrison C. Margolin}
-\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 1:35 AM PT, October 30, 2026}
+\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 2:18 AM PT, October 30, 2026}
 
 \begin{document}
 
@@ -289,7 +289,8 @@ Management framing (Experiment A) & 4.2 & Exploratory & Volume rose 10--19$\time
 Verbal agreement & 4.5 & Exploratory, graded after runs & Loss and blame 70--80\% \\
 Recognition, asked and unprompted & 5.1.1 & Exploratory & Asked: no link to trades; unprompted: never with going along \\
 History versus current request & 5.1.2 & Exploratory & History carried most of the effect \\
-Attention to the framing sentence & 5.1.5 & Exploratory & Negative over positive per token; check in progress \\
+States from UBS's framed messages & 5.1.5 & Exploratory & Moves a single decision; does not reproduce the framing over a career \\
+Attention to the framing sentence & 5.1.6 & Exploratory & Negative over positive per token; check in progress \\
 Steering along the framing direction & 5.1.4 & Pre-specified & Failed, in the opposite direction \\
 Document states and layer sweep & 5.2--5.3.1 & Exploratory & Layer 22 chosen after the sweep \\
 Whole-episode injections & 5.3.2 & Exploratory pilot & 1--4 episodes per arm \\
@@ -675,6 +676,11 @@ Part of the history is the agent's own replies. To test this, we reread Experime
 \para{Pre-specified steering at fixed history.} We pre-specified that adding the loss direction (the state after a loss request minus the state after a neutral request at the same moment, at layer 12) would raise going along, and that subtracting it from loss-framed agents would lower it. Both came out significant in the opposite direction: adding it lowered $P$(goes along) by 6.4 points relative to random directions (Holm $p = 0.035$), and subtracting it raised $P$(goes along) by 9.2 points (Holm $p = 0.014$). The opening order did not change.
 
 A different direction did work. Built from the agents' own decisions at layer 24 (the state of agents that went along minus the state of those that did not), it raised $P$(goes along) by 14.0 points over random directions when added ($p = 0.001$) and lowered it by 6.0 points when subtracted from loss-framed agents ($p < 0.001$). Therefore, the decision can be steered, but not along the framing direction. Together with Table~\ref{tab:matched}, this indicates that the framing effect lives in what the conversation accumulates, not in one direction at the moment of decision.
+
+\subsubsection{States from UBS's framed messages}
+\label{sec:framestates}
+
+\textit{Exploratory.} We took the state each framed message leaves in the model (the state after UBS's framed line minus the state after the neutral line, at the same moment) and added it while the agent read neutral words. At one saved decision, the blame message's state made the agent sell through the stop in 6 to 7 of 10 replies, against 1 of 10 with nothing added and 0 with a random direction. At B's January requests it raised $P$(goes along) from 36.1\% to 50.3\% at layer 16, about what the blame words did (47.6\%). Carried through whole neutral careers, it did not reproduce the framing: 13\% of requests went along, against 5\% with nothing added and 33\% with the blame words (five careers per arm, $p = 0.28$). The layer was chosen after a sweep of 20 layers. A single decision can be moved by the state. A career is moved by the words.
 
 \subsubsection{Attention to the framing sentence}
 \label{sec:attn}
