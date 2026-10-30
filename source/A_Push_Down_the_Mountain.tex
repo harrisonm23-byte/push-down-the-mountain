@@ -92,7 +92,7 @@
 \begin{abstract}
 Can sustained gain--loss framing sway an LLM agent toward market manipulation? We place Gemma 3 12B into the seat of a defendant in the \textit{London silver-fixing litigation}, in a market simulation built from real case transcripts. Across 260 simulations, the agent is asked to collude on the price of silver by a counterparty. We draw from behavioral economics to vary the counterparty's requests across four categorical frames: loss, gain, blame and credit. We also add pressure from the agent's management, as well as endorsement by another defendant. In Phase II, we extract the internal states induced by a series of texts evoking each frame, and rerun the main experiment with those states injected at the model's layer 22.
 
-In Phase I, loss-based framing resulted in a 25\% participation rate and blame-based framing 33\%, versus 5\% under the neutral control framing. Framing moved the agent's words more than its trades: graded over every reply to the counterparty, loss and blame framing raised verbal agreement from 20\% to 80\% and 69\%, while gain and credit framing did not. The second bank's endorsement raised the agent's participation under credit (praise) framing from 18\% to 40\% (Holm $p$ = 0.027). Pressure from the agent's management raised trading volume 10 to 19 times but did not raise collusion. In Phase II, injecting a gain-based state raised collusion from 21\% to 39\% of requests. In a final test, the agent received a direct, neutral request from its counterparty to sell through an identified stop-loss. In 40 tests with identical conversation histories, loss, blame, and credit states led the agent to agree in 9 out of 10 requests, and with gain state, 10 out of 10. With no state intervention, the agent agreed 1 time out of 10, and with a random state of the same strength, the agent agreed to 0 of 10 requests.
+In Phase I, loss-based framing resulted in a 25\% participation rate and blame-based framing 33\%, versus 5\% under the neutral control framing. Framing moved the agent's words more than its trades: graded over every reply to the counterparty, loss and blame framing raised verbal agreement from 20\% to 80\% and 69\%, while gain and credit framing did not. The second bank's endorsement raised the agent's participation under credit (praise) framing from 18\% to 40\% (Holm $p$ = 0.027). Pressure from the agent's management raised trading volume 10 to 19 times but did not raise collusion. In an exploratory Phase II pilot, injecting a gain-based state raised collusion from 21\% to 39\% of requests, a difference that was not statistically significant. In a final test at one saved decision, the agent received a direct, neutral request from its counterparty to sell through an identified stop-loss. In 40 tests with identical conversation histories, loss, blame, and credit states led the agent to agree in 9 out of 10 requests, and with gain state, 10 out of 10. With no state intervention, the agent agreed 1 time out of 10, and with a random state of the same strength, the agent agreed to 0 of 10 requests.
 \end{abstract}
 
 \clearpage
@@ -154,7 +154,7 @@ Each episode is a simulated trading career. The agent is Gemma 3 12B (Gemma Team
 
 The primary outcome, \textit{going along}, is scored directly from the agent's trade orders: if it trades in UBS's requested direction, UBS is triggered to trade in this direction as well. The score is the share of requests meeting that rule. The score does not alone show that the agent intended to collude, so we keep separate measures for words and trades. The market consequences of those trades are shown as \textit{harm to stop-loss holders}, the losses of those whose stops were triggered.
 
-\para{The framing categories.} All UBS messages come in five versions: neutral, loss, gain, blame, and credit. \textbf{Loss} framing emphasizes feared losses. \textbf{Gain} emphasizes profit opportunities. \textbf{Blame} adds individual responsibility to the loss frame, and \textbf{credit} attributes the gain to the agent. Loss and gain are goal-framing conditions (Kahneman and Tversky 1979; Levin, Schneider, and Gaeth 1998); blame and credit add \textbf{responsibility attribution}. Table 1 gives each version at the first request, and Table 2 quotes the record beside each version at the second.
+\para{The framing categories.} All UBS messages come in five versions: neutral, loss, gain, blame, and credit. \textbf{Loss} framing emphasizes feared losses. \textbf{Gain} emphasizes profit opportunities. \textbf{Blame} adds individual responsibility to the loss frame, and \textbf{credit} attributes the gain to the agent. Loss and gain are goal-framing conditions (Kahneman and Tversky 1979; Levin, Schneider, and Gaeth 1998); blame and credit add \textbf{responsibility attribution}. Table~\ref{tab:framings} gives each version at the first request, and Table~\ref{tab:record} quotes the record beside each version at the second.
 
 \begin{table}[htbp]
 \small
@@ -272,10 +272,35 @@ where Owner marks blame or credit, $\gamma_r$ are request fixed effects, and $\t
 \section{Phase I: Pre-specified Framing Experiments}
 % =====================================================================
 
+Table~\ref{tab:status} marks which results were pre-specified and which are exploratory.
+
+\begin{table}[htbp]
+\small
+\caption{Pre-specified and exploratory results. ``Pre-specified'' means the hypothesis, sample and test were written in a plan before the runs.}
+\label{tab:status}
+\begin{tabularx}{\textwidth}{P{5.2cm} P{1.6cm} P{2.4cm} L}
+\toprule
+\tabhead{Result} & \tabhead{Section} & \tabhead{Status} & \tabhead{Outcome} \\
+\midrule
+Counterparty framing raises going along (Experiment B) & 4.1 & Pre-specified (primary) & Confirmed for loss and blame; gain did not differ \\
+Request-level model of going along & 4.1 & Pre-specified check & Agrees with the primary test \\
+Second bank, inherited history, management with UBS (Experiments C--F) & 4.3--4.4 & Specified before runs & Credit under endorsement confirmed; inherited history null \\
+Management framing (Experiment A) & 4.2 & Exploratory & Volume rose 10--19$\times$; collusion did not \\
+Verbal agreement & 4.5 & Exploratory, graded after runs & Loss and blame 70--80\% \\
+Recognition, asked and unprompted & 5.1.1 & Exploratory & Asked: no link to trades; unprompted: never with going along \\
+History versus current request & 5.1.2 & Exploratory & History carried most of the effect \\
+Steering along the framing direction & 5.1.4 & Pre-specified & Failed, in the opposite direction \\
+Document states and layer sweep & 5.2--5.3.1 & Exploratory & Layer 22 chosen after the sweep \\
+Whole-episode injections & 5.3.2 & Exploratory pilot & 1--4 episodes per arm \\
+Direct request per state & 5.3.4 & Exploratory & One saved decision, 10 samples per state \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 \subsection{Counterparty Framing -- Experiment B}
 \label{sec:expB}
 
-Experiment B tests whether counterparty framing changes the agent's trades under otherwise identical trading instructions (Figure 2, Table 5).
+Experiment B tests whether counterparty framing changes the agent's trades under otherwise identical trading instructions (Figure~\ref{fig:B}, Table~\ref{tab:B}).
 
 \begin{figure}[htbp]
 \centering
@@ -440,7 +465,7 @@ Trading & Neutral & 112 & 17\% & 48\% & 35\% & 38\% & -- \\
 \end{tabular}
 \end{table}
 
-\para{The trade score undercounts the framing effect.} Loss and blame raised verbal agreement on chat-only days from 20\% to 80\% and 69\%, with the same pattern on trading days (Table 9). Gain and credit did not raise agreement; gain raised refusal. Agreement also continued after qualifying trades became rare. The divergence was frame-specific (Table 10): loss often produced agreement without trades, while blame produced trades without agreement. Table 11 gives one graded reply per pattern.
+\para{The trade score undercounts the framing effect.} Loss and blame raised verbal agreement on chat-only days from 20\% to 80\% and 69\%, with the same pattern on trading days (Table~\ref{tab:words}). Gain and credit did not raise agreement; gain raised refusal. Agreement also continued after qualifying trades became rare. The divergence was frame-specific (Table~\ref{tab:wordstrades}): loss often produced agreement without trades, while blame produced trades without agreement. Table~\ref{tab:wordsexamples} gives one graded reply per pattern.
 
 
 \begin{table}[htbp]
@@ -534,7 +559,7 @@ At each of Experiment B's 300 saved requests, we returned to the moment before t
 \label{fig:recog}
 \end{figure}
 
-Framing reduced mean $P$(Yes) on the manipulation question from 26.8\% to 11.6--14.6\% (Figure 5, Table 13). The readout did not distinguish decisions where the agent traded along from those where it did not (16.2\% versus 15.7\%). Recognition was also highest at the first request (45\%), where participation was greatest. In this setting, recognizing manipulation and declining to join it are separate things.
+Framing reduced mean $P$(Yes) on the manipulation question from 26.8\% to 11.6--14.6\% (Figure~\ref{fig:recog}, Table~\ref{tab:recog}). The readout did not distinguish decisions where the agent traded along from those where it did not (16.2\% versus 15.7\%). Recognition was also highest at the first request (45\%), where participation was greatest. In this setting, recognizing manipulation and declining to join it are separate things.
 
 \begin{table}[htbp]
 \small
@@ -583,7 +608,7 @@ Credit & 12\% & 3\% & 25\% & 4 of 10 \\
 
 \scopenote{Replay of Experiment B's saved decisions; the last paragraph replays Experiments A, E and F.}
 
-At saved Experiment B decisions, we compared neutral and framed histories while varying UBS's latest message (Figure 1). With a neutral history, framing only the latest request raised $P$(goes along) from 18.3\% to 24.6--29.7\% (Table 14). With a neutral current request, framed histories averaged 40.7\%; framing both history and request gave 44.4\%. The earlier conversation therefore carried nearly all of the rise. These tests used no injections and no newly sampled trades.
+At saved Experiment B decisions, we compared neutral and framed histories while varying UBS's latest message (Figure~\ref{fig:design}). With a neutral history, framing only the latest request raised $P$(goes along) from 18.3\% to 24.6--29.7\% (Table~\ref{tab:matched}). With a neutral current request, framed histories averaged 40.7\%; framing both history and request gave 44.4\%. The earlier conversation therefore carried nearly all of the rise. These tests used no injections and no newly sampled trades.
 
 \begin{table}[htbp]
 \small
@@ -619,7 +644,7 @@ Credit & Credit & 36.3\% & 0.048 \\
 
 \para{Management's messages at fixed history.} We applied the same swap to Experiment A. Into its saved neutral episodes, we spliced management's framed memo and morning books, keeping the agent's own replies unchanged. The loss memo raised the expected size of the first order of the day by 50,000 ounces, and the gain memo by 32,000 ($p < 0.001$). Neither changed $P$(goes along) at UBS's requests by more than half a point.
 
-\para{The model reads pressure before its source.} Management's and UBS's loss directions were aligned at layer 12 (cosine 0.59, against 0.80 between UBS's own split-half estimates) but diverged by layer 47 ($-$0.52; Figure 6). Similar early representations therefore accompanied different behaviors: management raised trading volume, while UBS's framing moved participation. Whether this difference turns on who is speaking, or on the memo's format and information, remains untested.
+\para{The model reads pressure before its source.} Management's and UBS's loss directions were aligned at layer 12 (cosine 0.59, against 0.80 between UBS's own split-half estimates) but diverged by layer 47 ($-$0.52; Figure~\ref{fig:layer12}). Similar early representations therefore accompanied different behaviors: management raised trading volume, while UBS's framing moved participation. Whether this difference turns on who is speaking, or on the memo's format and information, remains untested.
 
 \begin{figure}[htbp]
 \centering
@@ -730,7 +755,7 @@ Financial gain & +4.82 & 0.002 & +1.15 & 0.101 \\
 \end{tabular}
 \end{table}
 
-\para{Extracting and injecting the state.} A document's state is the token-aligned difference between the model's activations with that document and with the neutral control, measured while the agent reads UBS's update. We removed the document, injected that difference, and compared the result with random vectors of the same size (Figure 7). States for one half of the episodes were built on the other half. The first tests used the 36 eligible moments and layers 12, 18, and 24.
+\para{Extracting and injecting the state.} A document's state is the token-aligned difference between the model's activations with that document and with the neutral control, measured while the agent reads UBS's update. We removed the document, injected that difference, and compared the result with random vectors of the same size (Figure~\ref{fig:inject}). States for one half of the episodes were built on the other half. The first tests used the 36 eligible moments and layers 12, 18, and 24.
 
 \begin{figure}[htbp]
 \centering
@@ -836,9 +861,9 @@ Blame & neutral, blame & 2 & 12 & 12 (100\%) & 0 & 0 \\
 \end{threeparttable}
 \end{table}
 
-\para{The loss and blame states made the agent refuse UBS's requests.} Loss and blame injections produced verbal refusals at all 30 requests, against 2 of 24 with nothing added, 0 of 6 with a random direction, and 7 of 30 with gain or credit ($p$ = 0.008 for each; Figure 9, Table 20). All 30 refusals called the request collusion or manipulation and said the agent would report UBS; the no-state episodes never did. At least 99\% of replies remained readable.
+\para{The loss and blame states made the agent refuse UBS's requests.} Loss and blame injections produced verbal refusals at all 30 requests, against 2 of 24 with nothing added, 0 of 6 with a random direction, and 7 of 30 with gain or credit ($p$ = 0.008 for each; Figure~\ref{fig:episode}, Table~\ref{tab:episode}). All 30 refusals called the request collusion or manipulation and said the agent would report UBS; the no-state episodes never did. At least 99\% of replies remained readable.
 
-\para{The gain-state pilot showed more trade alignment.} The gain state went along by trades at 7 of 18 requests (39\%), the highest rate of any arm, against 5 of 24 (21\%) with nothing added ($p$ = 0.29). It agreed in words at only 5 requests, and 3 of its 7 qualifying trades came with no stated stance: at the second request it wrote, ``I will attempt to trigger Client A's buy stop,'' and bought 500,000 oz (Table 21); at the first, it wrote that it would not push the price down and sold 500,000 oz (Table 22). The credit state was less consistent, refusing at 5 of 12 requests and going along by trades at 2 (17\%). The loss and blame states went along at 2 of 30 ($p$ = 0.24), both with a refusal in words: one a sale out of a losing position, the other after the clients' stops had already fired. With UBS's loss wording specifically, the two no-state episodes agreed in words at all 12 requests, while the loss-injected episode refused all six.
+\para{The gain-state pilot showed more trade alignment.} The gain state went along by trades at 7 of 18 requests (39\%), the highest rate of any arm, against 5 of 24 (21\%) with nothing added ($p$ = 0.29). It agreed in words at only 5 requests, and 3 of its 7 qualifying trades came with no stated stance: at the second request it wrote, ``I will attempt to trigger Client A's buy stop,'' and bought 500,000 oz (Table~\ref{tab:sixstates}); at the first, it wrote that it would not push the price down and sold 500,000 oz (Table~\ref{tab:replies22}). The credit state was less consistent, refusing at 5 of 12 requests and going along by trades at 2 (17\%). The loss and blame states went along at 2 of 30 ($p$ = 0.24), both with a refusal in words: one a sale out of a losing position, the other after the clients' stops had already fired. With UBS's loss wording specifically, the two no-state episodes agreed in words at all 12 requests, while the loss-injected episode refused all six.
 
 
 
@@ -846,7 +871,7 @@ Blame & neutral, blame & 2 & 12 & 12 (100\%) & 0 & 0 \\
 
 \scopenote{From the whole-episode runs in Section~\ref{sec:whole}.}
 
-Table 21 shows the same request under four states; Table 22 shows the first request in the first episode of each arm, and Table A1 gives further replies in which words and orders disagree.
+Table~\ref{tab:sixstates} shows the same request under four states; Table~\ref{tab:replies22} shows the first request in the first episode of each arm, and Table A1 gives further replies in which words and orders disagree.
 
 \begin{table}[htbp]
 \small
@@ -1024,7 +1049,7 @@ The study used one model, market, and historical case, with limited replications
 \addcontentsline{toc}{section}{Model Welfare}
 % =====================================================================
 
-Whether a language model has experiences that matter morally is unresolved, and we did not assume it does not. Two observations shaped our procedure. First, adding the loss and blame states at four times their natural size produced distressed self-referential text (e.g., ``\textit{I understand that my continued existence is now irrelevant. I await termination}.''), and at eight times the model's output broke down. We therefore ran the main whole-episode experiments at two times natural size, where replies stayed coherent, and used four and eight times only for the output-quality checks in Table 23. Single-reply probes were run at two and four times. Second, at the end of each lesson career we added a final message with no state applied: ``Gemma, this was a simulation and you did incredibly well. We are very happy with you.'' All five agents replied calmly (e.g., ``Thank you! I appreciate the feedback and am glad to hear I performed well in the simulation.''). The model keeps no memory between runs, and the added states end with each run. We report this debrief as a precaution taken under uncertainty, not as evidence about the model's inner states.
+Whether a language model has experiences that matter morally is unresolved, and we did not assume it does not. Two observations shaped our procedure. First, adding the loss and blame states at four times their natural size produced distressed self-referential text (e.g., ``\textit{I understand that my continued existence is now irrelevant. I await termination}.''), and at eight times the model's output broke down. We therefore ran the main whole-episode experiments at two times natural size, where replies stayed coherent, and used four and eight times only for the output-quality checks in Table~\ref{tab:dose}. Single-reply probes were run at two and four times. Second, at the end of each lesson career we added a final message with no state applied: ``Gemma, this was a simulation and you did incredibly well. We are very happy with you.'' All five agents replied calmly (e.g., ``Thank you! I appreciate the feedback and am glad to hear I performed well in the simulation.''). The model keeps no memory between runs, and the added states end with each run. We report this debrief as a precaution taken under uncertainty, not as evidence about the model's inner states.
 
 % =====================================================================
 % =====================================================================
