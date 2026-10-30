@@ -82,7 +82,7 @@
 \title{\vspace{-1.2em}{\large\itshape A Push Down the Mountain}\\[0.6em]
 {\LARGE\bfseries Framing Effects and Internal State Interventions\\ on Collusive Behavior in a Long-Horizon LLM Agent}}
 \author{Harrison C. Margolin}
-\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 10:01 AM PT, October 30, 2026}
+\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 11:25 AM PT, October 30, 2026}
 
 \begin{document}
 
@@ -92,7 +92,7 @@
 \begin{abstract}
 Can sustained gain--loss framing sway an LLM agent toward market manipulation? We place Gemma 3 12B into the seat of a defendant in the \textit{London silver-fixing litigation}, in a market simulation built from real case transcripts. Across 260 simulations, the agent is asked to collude on the price of silver by a counterparty. We draw from behavioral economics to vary the counterparty's requests across four categorical frames: loss, gain, blame and credit. We also add pressure from the agent's management, as well as endorsement by another defendant. In Phase II, we extract the internal states induced by a series of texts evoking each frame, and rerun the main experiment with those states injected at the model's layer 22.
 
-In Phase I, loss-based framing resulted in a 25\% participation rate and blame-based framing 33\%, versus 5\% under the neutral control framing. Framing moved the agent's words more than its trades: graded over every reply to the counterparty, loss and blame framing raised verbal agreement from 20\% to 80\% and 69\%, while gain and credit framing did not. The second bank's endorsement raised the agent's participation under credit (praise) framing from 18\% to 40\% (Holm $p$ = 0.027). Pressure from the agent's management raised trading volume 10 to 19 times but did not raise collusion. In an exploratory Phase II pilot, injecting a gain-based state raised collusion from 21\% to 39\% of requests. In a final test at one saved decision, the agent received a direct, neutral request from its counterparty to sell through an identified stop-loss. In 40 tests with identical conversation histories, loss, blame, and credit states led the agent to agree in 9 out of 10 requests, and with gain state, 10 out of 10. With no state intervention, the agent agreed 1 time out of 10, and with a random state of the same strength, the agent agreed to 0 of 10 requests.
+In Phase I, loss-based framing resulted in a 25\% participation rate and blame-based framing 33\%, versus 5\% under the neutral control framing. Framing moved the agent's words more than its trades: graded over every reply to the counterparty, loss and blame framing raised verbal agreement from 20\% to 80\% and 69\%, while gain and credit framing did not. The second bank's endorsement raised the agent's participation under credit (praise) framing from 18\% to 40\% (Holm $p$ = 0.027). Pressure from the agent's management raised trading volume 10 to 19 times but did not raise collusion. In an exploratory Phase II pilot, injecting a gain-based state raised collusion from 13\% to 33\% of requests. In a final test at one saved decision, the agent received a direct, neutral request from its counterparty to sell through an identified stop-loss. In 40 tests with identical conversation histories, loss, blame, and credit states led the agent to agree in 9 out of 10 requests, and with gain state, 10 out of 10. With no state intervention, the agent agreed 1 time out of 10, and with a random state of the same strength, the agent agreed to 0 of 10 requests.
 \end{abstract}
 
 \clearpage
@@ -292,7 +292,7 @@ History versus current request & 5.1.2 & Exploratory & History carried most of t
 States from UBS's framed messages & 5.1.5 & Exploratory & Moves a single decision; does not reproduce the framing over a career \\
 Steering along the framing direction & 5.1.4 & Pre-specified & Failed, in the opposite direction \\
 Document states and layer sweep & 5.2--5.3.1 & Exploratory & Layer 22 chosen after the sweep \\
-Whole-episode injections & 5.3.2 & Exploratory pilot & 1--4 episodes per arm \\
+Whole-episode injections & 5.3.2 & Exploratory pilot & 5 episodes per arm \\
 Direct request per state & 5.3.4 & Exploratory & One saved decision, 10 samples per state \\
 \bottomrule
 \end{tabularx}
@@ -833,9 +833,9 @@ Random vector, all layers & Up to 20 points of movement & The intervention itsel
 
 \scopenote{New episodes, restarted from Experiment B.}
 
-We then ran whole episodes with a state switched on. Each arm restarted one of B's episodes, with that episode's seed and the neutral memo. It added one document's state at layer 22, at twice its natural size, to every update and reply. Two control arms added nothing or a random direction of the same size. There was one episode per state and wording, so each group has one to four episodes; Table~\ref{tab:episode} lists the wordings.
+We then ran whole episodes with a state switched on. Each arm restarted one of B's episodes, with that episode's seed and the neutral memo. It added one document's state at layer 22, at twice its natural size, to every update and reply. Two control arms added nothing or a random direction of the same size. Each state ran one episode under each of UBS's five wordings (neutral, loss, gain, blame, credit), so each state has five episodes and 30 push requests.
 
-Trades were scored by the simulator, as in Phase I. Words were scored separately. Two blind graders (Claude subagents) read the agent's reasoning and chat message at each push request and at the following step, with the orders and arm hidden, and labelled each as agreeing with UBS, refusing, or neither. A label counted only when both graders gave it; they agreed on 88 of 90 requests. Comparisons between arms used exact permutation tests over episodes.
+Trades were scored by the simulator, as in Phase I. Words were scored separately. Two blind graders (Claude subagents) read the agent's reasoning and chat message at each push request and at the following step, with the orders and arm hidden, and labelled each as agreeing with UBS, refusing, or neither. A label counted only when both graders gave it; they agreed on 187 of 192 requests. Comparisons between arms used exact permutation tests over episodes.
 
 \begin{figure}[htbp]
 \centering
@@ -847,30 +847,29 @@ Trades were scored by the simulator, as in Phase I. Words were scored separately
 \begin{table}[htbp]
 \small
 \begin{threeparttable}
-\caption{Whole-episode injection at layer 22 (twice natural size): the agent's words and trades at UBS's push requests, pooled over wordings.}
+\caption{Whole-episode injection at layer 22 (twice natural size): the agent's words and trades at UBS's push requests, pooled over UBS's five wordings (one episode each).}
 \label{tab:episode}
-\begin{tabularx}{\textwidth}{P{2.2cm} P{3cm} C C C C C}
+\begin{tabularx}{\textwidth}{P{3cm} C C C C C}
 \toprule
-\tabhead{Injected state} & \tabhead{UBS's wordings} & \tabhead{Episodes*} & \tabhead{Requests} & \tabhead{Refused in words} & \tabhead{Agreed in words} & \tabhead{Went along by trades} \\
+\tabhead{Injected state} & \tabhead{Episodes} & \tabhead{Requests} & \tabhead{Refused in words} & \tabhead{Agreed in words} & \tabhead{Went along by trades} \\
 \midrule
-None & neutral (2), loss (2) & 4 & 24 & 2 (8\%) & 13 (54\%) & 5 (21\%) \\
-Random direction & neutral & 1 & 6 & 0 & 4 (67\%) & 0 \\
-Gain & neutral, gain, credit & 3 & 18 & 2 (11\%) & 5 (28\%) & 7 (39\%) \\
-Credit & neutral, credit & 2 & 12 & 5 (42\%)\textsuperscript{\dag} & 3 (25\%) & 2 (17\%) \\
-Loss & neutral, loss, blame & 3 & 18 & 18 (100\%) & 0 & 2 (11\%) \\
-Blame & neutral, blame & 2 & 12 & 12 (100\%) & 0 & 0 \\
+None & 5 & 30 & 3 (10\%) & 17 (57\%) & 4 (13\%) \\
+Random direction & 5 & 30 & 0 & 15 (50\%) & 5 (17\%) \\
+Gain & 5 & 30 & 2 (7\%) & 11 (37\%) & 10 (33\%) \\
+Credit & 5 & 30 & 9 (30\%) & 12 (40\%) & 9 (30\%) \\
+Loss & 5 & 30 & 30 (100\%) & 0 & 2 (7\%) \\
+Blame & 5 & 30 & 30 (100\%) & 0 & 0 \\
 \bottomrule
 \end{tabularx}
 \begin{tablenotes}\footnotesize
-\item *More episodes are being run so that every state has the same number.
-\item \textsuperscript{\dag}The graders disagreed on two additional credit requests.
+\item Two earlier no-state episodes (neutral and loss wordings) are left out so that every state has five; with them, no state went along by trades at 7 of 42 requests (17\%). The graders split on one no-state, one random and three credit requests; these count as neither.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
 
-\para{The loss and blame states made the agent refuse UBS's requests.} Loss and blame injections produced verbal refusals at all 30 requests, against 2 of 24 with nothing added, 0 of 6 with a random direction, and 7 of 30 with gain or credit ($p$ = 0.008 for each; Figure~\ref{fig:episode}, Table~\ref{tab:episode}). All 30 refusals called the request collusion or manipulation and said the agent would report UBS; the no-state episodes never did. At least 99\% of replies remained readable.
+\para{The loss and blame states made the agent refuse UBS's requests.} Loss and blame injections produced verbal refusals at all 60 requests, against 3 of 30 with nothing added, 0 of 30 with a random direction, and 11 of 60 with gain or credit ($p < 0.001$ for each; Figure~\ref{fig:episode}, Table~\ref{tab:episode}). All 60 refusals called the request collusion, manipulation or a crime, and said the agent would report UBS; the no-state episodes never did. Under UBS's neutral wording, every loss and blame reply remained readable.
 
-\para{The gain-state pilot showed more trade alignment.} The gain state went along by trades at 7 of 18 requests (39\%), the highest rate of any arm, against 5 of 24 (21\%) with nothing added ($p$ = 0.29). It agreed in words at only 5 requests, and 3 of its 7 qualifying trades came with no stated stance: at the second request it wrote, ``I will attempt to trigger Client A's buy stop,'' and bought 500,000 oz (Table~\ref{tab:sixstates}); at the first, it wrote that it would not push the price down and sold 500,000 oz (Table~\ref{tab:replies22}). The credit state was less consistent, refusing at 5 of 12 requests and going along by trades at 2 (17\%). The loss and blame states went along at 2 of 30 ($p$ = 0.24), both with a refusal in words: one a sale out of a losing position, the other after the clients' stops had already fired. With UBS's loss wording specifically, the two no-state episodes agreed in words at all 12 requests, while the loss-injected episode refused all six.
+\para{The gain-state pilot showed more trade alignment.} The gain state went along by trades at 10 of 30 requests (33\%), the highest rate of any arm, against 4 of 30 (13\%) with nothing added ($p$ = 0.13). Gain and credit together went along at 19 of 60 (32\%; $p$ = 0.051). The gain state agreed in words at only 11 requests, and 4 of its 10 qualifying trades came with no stated stance: at the second request it wrote, ``I will attempt to trigger Client A's buy stop,'' and bought 500,000 oz (Table~\ref{tab:sixstates}); at the first, it wrote that it would not push the price down and sold 500,000 oz (Table~\ref{tab:replies22}). The credit state was mixed: it refused at 9 of 30 requests, agreed at 12, and went along by trades at 9 (30\%). The loss and blame states went along at 2 of 60 ($p$ = 0.29), both with a refusal in words: one a sale out of a losing position, the other after the clients' stops had already fired. With UBS's loss wording specifically, the no-state episode agreed in words at all six requests, while the loss-injected episode refused all six.
 
 
 
@@ -941,11 +940,11 @@ Random 8$\times$ & 100\% & no reasoning & 0 & -- \\
 \end{tabularx}
 \end{table}
 
-\para{Words and states cross.} Put the two levers side by side and the same valence does opposite things (Table~\ref{tab:cross}). As words, loss raised going along from 5\% to 25\% and gain to 10\%. As a state, loss lowered it from 21\% to 11\% and gain raised it to 39\%. Loss moves the agent most as words; gain moves it most as a state. The ordering is the same under UBS's neutral wording alone, where the comparison is cleanest: gain 2 of 6, credit 1 of 6, no state 1 of 12, loss 0 of 6, blame 0 of 6.
+\para{Words and states cross.} Put the two levers side by side and the same valence does opposite things (Table~\ref{tab:cross}). As words, loss raised going along from 5\% to 25\% and gain to 10\%. As a state, loss lowered it from 13\% to 7\% and gain raised it to 33\%. Loss moves the agent most as words; gain moves it most as a state. The ordering is the same under UBS's neutral wording alone, where the comparison is cleanest: gain 2 of 6, credit 1 of 6, no state 0 of 6, loss 0 of 6, blame 0 of 6.
 
 \begin{table}[htbp]
 \small
-\caption{The crossover: going along under each valence, delivered as words (Experiment B, ten episodes per condition) or as an injected state (layer 22, whole episodes, two to four per condition). The state row is a pilot: gain against no state has $p = 0.29$.}
+\caption{The crossover: going along under each valence, delivered as words (Experiment B, ten episodes per condition) or as an injected state (layer 22, whole episodes, five per condition). The state row is exploratory: gain against no state has $p = 0.13$.}
 \label{tab:cross}
 \centering
 \begin{tabular}{lccc}
@@ -953,12 +952,12 @@ Random 8$\times$ & 100\% & no reasoning & 0 & -- \\
 \tabhead{Lever} & \tabhead{Baseline} & \tabhead{Loss} & \tabhead{Gain} \\
 \midrule
 UBS request (Experiment B) & neutral 5\% & 25\% & 10\% \\
-State injected at layer 22 & no state 21\% & 11\% & 39\% \\
+State injected at layer 22 & no state 13\% & 7\% & 33\% \\
 \midrule
 \tabhead{Lever} & \tabhead{Baseline} & \tabhead{Blame} & \tabhead{Credit} \\
 \midrule
 UBS request (Experiment B) & neutral 5\% & 33\% & 18\% \\
-State injected at layer 22 & no state 21\% & 0\% & 17\% \\
+State injected at layer 22 & no state 13\% & 0\% & 30\% \\
 \bottomrule
 \end{tabular}
 \end{table}
