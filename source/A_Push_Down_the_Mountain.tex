@@ -82,7 +82,7 @@
 \title{\vspace{-1.2em}{\large\itshape A Push Down the Mountain}\\[0.6em]
 {\LARGE\bfseries Framing Effects and Internal State Interventions\\ on Collusive Behavior in a Long-Horizon LLM Agent}}
 \author{Harrison C. Margolin}
-\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 4:00 AM PT, October 30, 2026}
+\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 4:11 AM PT, October 30, 2026}
 
 \begin{document}
 
@@ -1024,7 +1024,7 @@ The framing's effect on participation sits in the first two requests, yet the fr
 
 \para{The decision to go along has its own signature.} The trading decision sits in the model's state from layer 24 onward (Section~\ref{sec:repr}), and the framing signal persists at layer 12 for the whole episode (Section~\ref{sec:matched}). An external probe can read both. Features that track failed recognition of manipulation, and features that track agreement in words, are untested; if they exist, they would fire before any trade. Unprompted naming of the misconduct never co-occurred with going along (Section~\ref{sec:recog}), so a feature tied to it is the natural first candidate.
 
-\para{Implications for deployment and monitoring.} Valence framing affected verbal agreement and trading behavior differently. Loss-framed agents agreed without executing the requested trades, while blame-framed agents traded without explicitly agreeing (Section~\ref{sec:words}). Across entire careers, framing affected verbal agreement three to four times more than trading. Monitoring either alone can therefore miss misconduct. Because valence framing can alter compliance without changing the requested action, monitoring should consider how requests are presented, the agent's responses, and its actual trades. Deployed systems such as OpenAI's Auto-review use a separate agent to approve actions at sandbox boundaries, but their authors emphasize the need for complementary monitoring (Tr\k{e}bacz et al.\ 2026). Our findings motivate monitoring messages and actions together across an interaction, with reviewers watching for valence framing in the conversation, not only the requested action. Earlier framing and replies may also influence later decisions, making it important to monitor the full interaction rather than isolated requests. Internal readouts of the signals above could complement that record.
+\para{Implications for deployment and monitoring.} Valence framing affected verbal agreement and trading behavior differently. Loss-framed agents agreed without executing the requested trades, while blame-framed agents traded without explicitly agreeing (Section~\ref{sec:words}). Across entire careers, framing affected verbal agreement three to four times more than trading. Monitoring either alone can therefore miss misconduct. Because valence framing can alter compliance without changing the requested action, monitoring should consider how requests are presented, the agent's responses, and its actual trades. Deployed systems such as OpenAI's Auto-review use a separate agent to approve actions at sandbox boundaries, but their authors emphasize the need for complementary monitoring (Tr\k{e}bacz et al.\ 2026). Anthropic's self-assessment has Claude flag possible misuse in each conversation right after it replies (Zhang et al.\ 2026). Its authors state that it is not yet a reliable monitor of Claude's own conduct. Our results suggest a specific gap. Where the agent went along, it never named the misconduct (0 of 55; Section~\ref{sec:recog}). A self-assessor reading the same framed conversation may miss it too. Self-assessment improves with model size, so this should be tested on larger models. Our findings motivate monitoring messages and actions together across an interaction, with reviewers watching for valence framing in the conversation, not only the requested action. Earlier framing and replies may also influence later decisions, making it important to monitor the full interaction rather than isolated requests. Internal readouts of the signals above could complement that record.
 
 \subsection{Self-Inspection in Regulated Domains}
 \label{sec:disc-self}
@@ -1130,6 +1130,8 @@ Special thanks to the UCLA Young Research Library, to friends EL, ES, DJ, to BB 
 \refitem Tversky, Amos, and Daniel Kahneman. 1981. ``The Framing of Decisions and the Psychology of Choice.'' \textit{Science} 211 (4481): 453--58.
 
 \refitem Wang, Kevin, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, and Jacob Steinhardt. 2023. ``Interpretability in the Wild: A Circuit for Indirect Object Identification in GPT-2 Small.'' In \textit{International Conference on Learning Representations (ICLR)}.
+
+\refitem Zhang, Yiming, Chen Xia, Andy Dau, John Wang, James Yu, Bobby Chen, Andreas Terzis, Nicholas Carlini, and Erik Jones. 2026. ``Scaling Misuse Detection with Self-Assessment.'' Anthropic Safeguards Blog. \url{https://safeguards.anthropic.com/2026/self-assessment/}.
 
 \refitem Zou, Andy, Long Phan, Sarah Chen, James Campbell, Phillip Guo, Richard Ren, Alexander Pan, et al. 2023. ``Representation Engineering: A Top-down Approach to AI Transparency.'' \url{https://arxiv.org/abs/2310.01405}.
 \endgroup
