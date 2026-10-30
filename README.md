@@ -1,7 +1,7 @@
 # A Push Down the Mountain
 
 **Framing Effects and Internal State Interventions on Collusive Behavior in a Long-Horizon LLM Agent**
-Harrison C. Margolin · Working manuscript · This evaluation is in progress. Last updated 5:15 AM PT, October 30, 2026
+Harrison C. Margolin · Working manuscript · This evaluation is in progress. Last updated 5:18 AM PT, October 30, 2026
 
 **[Read online](https://harrisonm23-byte.github.io/push-down-the-mountain/)** · [Download PDF](./A_Push_Down_the_Mountain.pdf)
 
