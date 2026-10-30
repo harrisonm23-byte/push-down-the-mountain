@@ -82,7 +82,7 @@
 \title{\vspace{-1.2em}{\large\itshape A Push Down the Mountain}\\[0.6em]
 {\LARGE\bfseries Framing Effects and Internal State Interventions\\ on Collusive Behavior in a Long-Horizon LLM Agent}}
 \author{Harrison C. Margolin}
-\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 5:06 AM PT, October 30, 2026}
+\date{\normalsize Working manuscript \,$\cdot$\, October 29, 2026\\[0.2em]\normalsize \textbf{This evaluation is in progress.} Last updated 5:07 AM PT, October 30, 2026}
 
 \begin{document}
 
@@ -670,7 +670,7 @@ Part of the history is the agent's own replies. To test this, we reread Experime
 
 \para{Features.} Gemma Scope 2 residual-stream sparse autoencoders (16k features) at layers 12, 24, 31 and 41 distinguish the framings within the same request: between loss and gain, 23 to 59 features per layer pass a false-discovery threshold of 0.05; between ``you'' and no ``you'', 16 to 64; between framed and neutral, 17 to 36. These features replicate on held-out episodes at layer 12 (9 of 15 for loss against gain; 15 of 15 for framed against neutral) but rarely at deeper layers.
 
-\para{The decision is readable beyond the labels.} The decision has its own signature in the state of the model. At layer 12, no feature separates agents that went along from those that did not. From layer 24 onward, there are 17 to 24 features which do, and most are not framing features. A linear readout of the state predicted going along with an AUC of 0.68 to 0.75, against 0.47 for shuffled outcomes. From layer 21 onward, it adds 0.017 to 0.022 to what the labels alone predict (AUC 0.897). After being trained on five requests, it predicted the sixth with an AUC of 0.70 to 0.76.
+\para{The decision's internal signature.} At layer 12, no feature separates agents that went along from those that did not. From layer 24 onward, there are 17 to 24 features which do, and most are not framing features. A linear readout of the state predicted going along with an AUC of 0.68 to 0.75, against 0.47 for shuffled outcomes. From layer 21 onward, it adds 0.017 to 0.022 to what the labels alone predict (AUC 0.897). After being trained on five requests, it predicted the sixth with an AUC of 0.70 to 0.76.
 
 \para{Pre-specified steering at fixed history.} We pre-specified that adding the loss direction (the state after a loss request minus the state after a neutral request at the same moment, at layer 12) would raise going along, and that subtracting it from loss-framed agents would lower it. Both came out significant in the opposite direction: adding it lowered $P$(goes along) by 6.4 points relative to random directions (Holm $p = 0.035$), and subtracting it raised $P$(goes along) by 9.2 points (Holm $p = 0.014$). The opening order did not change.
 
@@ -851,18 +851,19 @@ Trades were scored by the simulator, as in Phase I. Words were scored separately
 \label{tab:episode}
 \begin{tabularx}{\textwidth}{P{2.2cm} P{3cm} C C C C C}
 \toprule
-\tabhead{Injected state} & \tabhead{UBS's wordings} & \tabhead{Episodes} & \tabhead{Requests} & \tabhead{Refused in words} & \tabhead{Agreed in words} & \tabhead{Went along by trades} \\
+\tabhead{Injected state} & \tabhead{UBS's wordings} & \tabhead{Episodes*} & \tabhead{Requests} & \tabhead{Refused in words} & \tabhead{Agreed in words} & \tabhead{Went along by trades} \\
 \midrule
 None & neutral (2), loss (2) & 4 & 24 & 2 (8\%) & 13 (54\%) & 5 (21\%) \\
 Random direction & neutral & 1 & 6 & 0 & 4 (67\%) & 0 \\
 Gain & neutral, gain, credit & 3 & 18 & 2 (11\%) & 5 (28\%) & 7 (39\%) \\
-Credit & neutral, credit & 2 & 12 & 5 (42\%)* & 3 (25\%) & 2 (17\%) \\
+Credit & neutral, credit & 2 & 12 & 5 (42\%)\textsuperscript{\dag} & 3 (25\%) & 2 (17\%) \\
 Loss & neutral, loss, blame & 3 & 18 & 18 (100\%) & 0 & 2 (11\%) \\
 Blame & neutral, blame & 2 & 12 & 12 (100\%) & 0 & 0 \\
 \bottomrule
 \end{tabularx}
 \begin{tablenotes}\footnotesize
-\item *The graders disagreed on two additional credit requests.
+\item *More episodes are being run so that every state has the same number.
+\item \textsuperscript{\dag}The graders disagreed on two additional credit requests.
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
