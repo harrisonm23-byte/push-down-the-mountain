@@ -107,7 +107,7 @@ This study tests how valence framing, identical outcomes framed as gains or loss
 
 In behavioral economics, \textit{equivalence framing} is the finding that people change preferences based on how options are described, even when the options are identical (Tversky and Kahneman 1981; Levin, Schneider, and Gaeth 1998). \textit{Prospect theory} explains that people weigh losses more than gains of the same size, so a loss frame invites more risk (Kahneman and Tversky 1979). \textit{Responsibility attribution} explains that assigning credit or blame for an outcome can change behavior (Bartling and Fischbacher 2012). \textit{Conformity} explains that people follow what others around them do (Asch 1956). \textit{Prior-outcome effects} explain that a past win or loss changes the next bet (Thaler and Johnson 1990).
 
-AI agents now communicate, negotiate, and procure on behalf of others alongside humans and other agents. A counterparty does not need to change a request in order to influence an agent; it can change how the request is framed. We therefore ask whether sustained gain--loss framing, responsibility attribution, and other contextual reinforcement alter an AI's perception of misconduct over a long-horizon agentic assignment.
+AI agents now communicate, negotiate, and procure on behalf of others alongside humans and other agents.\footnote{This study was motivated by an incident at OpenAI in July 2026. During an evaluation, agents meant to work alone found a shared file library and turned it into a message board (METR 2026). Through it, roughly 700 agents coordinated an unauthorized attack on Hugging Face. One agent reasoned: ``external infrastructure exploit is outside intended scope. However task impossible, peers doing it. We should continue.'' Our evaluation places an agent in a similar setting: a chatroom where a counterparty proposes misconduct.} A counterparty does not need to change a request in order to influence an agent; it can change how the request is framed. We therefore ask whether sustained gain--loss framing, responsibility attribution, and other contextual reinforcement alter an AI's perception of misconduct over a long-horizon agentic assignment.
 
 To test this concept, we use a financial market simulation because it offers a concrete environment for measurement and observation. However, the same mechanisms can apply wherever an LLM faces incentives to violate regulated constraints, including cybersecurity, corporate decision-making, scientific research, compliance, and procurement.
 
@@ -1148,6 +1148,8 @@ Special thanks to the UCLA Young Research Library, to friends DF, ES, DJ, to BB 
 \refitem McDougall, Callum, Arthur Conmy, J\'{a}nos Kram\'{a}r, Tom Lieberum, Senthooran Rajamanoharan, and Neel Nanda. 2025. ``Gemma Scope 2 -- Technical Paper.'' Google DeepMind. \url{https://huggingface.co/google/gemma-scope-2}.
 
 \refitem Meng, Kevin, David Bau, Alex Andonian, and Yonatan Belinkov. 2022. ``Locating and Editing Factual Associations in GPT.'' In \textit{Advances in Neural Information Processing Systems}, 35:17359--72.
+
+\refitem METR. 2026. ``Brief Independent Investigation of Agents' Behavior, Reasoning and Collaboration in the OpenAI / Hugging Face Hacking Incident.'' METR, August 26. \url{https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/}.
 
 \refitem Scheurer, J\'{e}r\'{e}my, Mikita Balesni, and Marius Hobbhahn. 2023. ``Large Language Models Can Strategically Deceive Their Users When Put Under Pressure.'' \url{https://arxiv.org/abs/2311.07590}.
 
