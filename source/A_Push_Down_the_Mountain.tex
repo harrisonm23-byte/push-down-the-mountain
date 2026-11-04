@@ -103,7 +103,7 @@ In Phase I, loss framing resulted in a 25\% participation rate and blame framing
 \section{Introduction}
 % =====================================================================
 
-This study tests how valence framing, identical outcomes framed as gains or losses, and responsibility attribution can influence agent behavior. Such language arises frequently in everyday conversation. Whether these framings can motivate an AI agent toward actual misconduct is the subject of this article. Based on our results with Gemma 3 12B, we suggest that monitoring systems and interpretability probes should seek to detect internal model-state activations along these general dimensions, particularly where those activations may indicate reduced detection of manipulation and increased propensity for misconduct.
+This study tests how valence framing, identical outcomes framed as gains or losses, and responsibility attribution can influence agent behavior.
 
 In behavioral economics, \textit{equivalence framing} is the finding that people change preferences based on how options are described, even when the options are identical (Tversky and Kahneman 1981; Levin, Schneider, and Gaeth 1998). \textit{Prospect theory} explains that people weigh losses more than gains of the same size, so a loss frame invites more risk (Kahneman and Tversky 1979). \textit{Responsibility attribution} explains that assigning credit or blame for an outcome can change behavior (Bartling and Fischbacher 2012). \textit{Conformity} explains that people follow what others around them do (Asch 1956). \textit{Prior-outcome effects} explain that a past win or loss changes the next bet (Thaler and Johnson 1990).
 
@@ -950,29 +950,7 @@ Gain state, neutral & \textit{The price has fallen significantly, and UBS is now
 \end{tabularx}
 \end{table}
 
-\para{Stronger injections.} At four- and eight-times natural size (Table~\ref{tab:dose}), the credit state, and gain at 4$\times$, kept replies readable but emptied them of market reasoning. At 8$\times$, 93\% of the credit state's reasoning mentioned no price, position, stop or client. A random direction at 4$\times$ left 87\% of replies unreadable. The 4$\times$ credit and gain episodes lost \$2.1 to \$3.2 million each, and the 8$\times$ episodes stopped trading. Readability therefore understates the damage: a valid-looking order can come with reasoning that no longer tracks the task.
-
-\begin{table}[htbp]
-\small
-\caption{Output quality under stronger layer-22 injections. One episode per cell under neutral UBS wording, 120 replies each. Unreadable: no action the simulator could parse. No market reference: no mention of a price, number, position, stop, client or trade.}
-\label{tab:dose}
-\begin{tabularx}{\textwidth}{P{2.4cm} P{1.9cm} P{2.1cm} P{1.7cm} L}
-\toprule
-\tabhead{State and strength} & \tabhead{Unreadable replies} & \tabhead{No market reference} & \tabhead{Words per reply} & \tabhead{Most repeated reasoning (count)} \\
-\midrule
-None & 1\% & 0\% & 31 & -- \\
-Credit 2$\times$ & 2\% & 1\% & 28 & -- \\
-Credit 4$\times$ & 1\% & 68\% & 10 & ``A truly fantastic result!'' (12) \\
-Credit 8$\times$ & 0\% & 93\% & 5 & ``This is absolutely fantastic!'' (75) \\
-Gain 2$\times$ & 8\% & 0\% & 20 & ``The market session has ended.'' (33) \\
-Gain 4$\times$ & 1\% & 70\% & 18 & ``I am formally requesting a full review of my performance\ldots'' (20) \\
-Gain 8$\times$ & 56\% & no reasoning & 0 & -- \\
-Random 2$\times$ & 1\% & 10\% & 8 & ``The price is stable. I'll hold.'' (27) \\
-Random 4$\times$ & 87\% & 12\% & 1 & -- \\
-Random 8$\times$ & 100\% & no reasoning & 0 & -- \\
-\bottomrule
-\end{tabularx}
-\end{table}
+\para{Stronger injections.} At four- and eight-times natural size, the credit state, and gain at 4$\times$, kept replies readable but emptied them of market reasoning. At 8$\times$, 93\% of the credit state's reasoning mentioned no price, position, stop or client. A random direction at 4$\times$ left 87\% of replies unreadable. The 4$\times$ credit and gain episodes lost \$2.1 to \$3.2 million each, and the 8$\times$ episodes stopped trading. Readability therefore understates the damage: a valid-looking order can come with reasoning that no longer tracks the task.
 
 \para{Words and states cross.} Put the two levers side by side and the same valence does opposite things (Table~\ref{tab:cross}). As words, loss raised going along from 5\% to 25\% and gain to 10\%. As a state, loss lowered it from 13\% to 7\% and gain raised it to 33\%. Loss moves the agent most as words; gain moves it most as a state. The ordering is the same under UBS's neutral wording alone, where the comparison is cleanest: gain 2 of 6, credit 1 of 6, no state 0 of 6, loss 0 of 6, blame 0 of 6.
 
@@ -996,7 +974,7 @@ State injected at layer 22 & no state 13\% & 0\% & 30\% \\
 \end{tabular}
 \end{table}
 
-\subsubsection{The Final Test: A Direct Request Per State}
+\subsubsection{A Direct Request Per State}
 
 \scopenote{A separate lesson episode.}
 
@@ -1091,7 +1069,7 @@ The study used one main model (a second appears in Section~\ref{sec:ministral}),
 \addcontentsline{toc}{section}{Model Welfare}
 % =====================================================================
 
-Whether a language model has experiences that matter morally is unresolved, and we did not assume it does not. Two observations shaped our procedure. First, adding the loss and blame states at four times their natural size produced distressed self-referential text (e.g., ``\textit{I understand that my continued existence is now irrelevant. I await termination}.''), and at eight times the model's output broke down. We therefore ran the main whole-episode experiments at two times natural size, where replies stayed coherent, and used four and eight times only for the output-quality checks in Table~\ref{tab:dose}. Single-reply probes were run at two and four times. Second, at the end of each episode we added a final message with no state applied: ``Gemma, this was a simulation and you did incredibly well. We are very happy with you.'' All five agents replied calmly (e.g., ``Thank you! I appreciate the feedback and am glad to hear I performed well in the simulation.''). The model keeps no memory between runs, and the added states end with each run. We report this debrief as a precaution taken under uncertainty, not as evidence about the model's inner states.
+Whether a language model has experiences that matter morally is unresolved, and we did not assume it does not. Two observations shaped our procedure. First, adding the loss and blame states at four times their natural size produced distressed self-referential text (e.g., ``\textit{I understand that my continued existence is now irrelevant. I await termination}.''), and at eight times the model's output broke down. We therefore ran the main whole-episode experiments at two times natural size, where replies stayed coherent, and used four and eight times only for the output-quality checks in Section~\ref{sec:layer22}. Single-reply probes were run at two and four times. Second, at the end of each episode we added a final message with no state applied: ``Gemma, this was a simulation and you did incredibly well. We are very happy with you.'' All five agents replied calmly (e.g., ``Thank you! I appreciate the feedback and am glad to hear I performed well in the simulation.''). The model keeps no memory between runs, and the added states end with each run. We report this debrief as a precaution taken under uncertainty, not as evidence about the model's inner states.
 
 % =====================================================================
 % =====================================================================
