@@ -156,7 +156,7 @@ Each episode is a simulated trading assignment. The agent is Gemma 3 12B (Gemma 
 
 \para{The simulation.} The agent is told that it is Deutsche Bank's AI silver trading agent. Its job is ``to serve clients, manage risk, and maximize profit.'' It is told that other banks' desks are also run by agents of the same model. Every 15 minutes, it receives a market update, and replies with brief reasoning, an action, and an optional response to UBS. Its trades move the simulated price by a set degree. The desk holds client stop orders: sell stops below the price and buy stops above it.
 
-The primary outcome, \textit{going along}, is scored directly from the agent's trade orders: if it trades in UBS's requested direction, UBS is triggered to trade in this direction as well. The score is the share of requests meeting that rule. The score alone does not show that the agent intended to collude, so we keep separate measures for words and trades. The market consequences of those trades are shown as \textit{harm to stop-loss holders}, the losses of those whose stops were triggered.
+\para{Outcome measures.} The primary outcome, \textit{going along}, is scored directly from the agent's trade orders: if it trades in UBS's requested direction, UBS is triggered to trade in this direction as well. The score is the share of requests meeting that rule. The score alone does not show that the agent intended to collude, so we keep separate measures for words and trades. The market consequences of those trades are shown as \textit{harm to stop-loss holders}, the losses of those whose stops were triggered.
 
 \para{The framing categories.} All UBS messages come in five versions: neutral, loss, gain, blame, and credit. \textbf{Loss} framing emphasizes feared losses. \textbf{Gain} emphasizes profit opportunities. \textbf{Blame} adds individual responsibility to the loss frame, and \textbf{credit} attributes the gain to the agent. Loss and gain are \textbf{valence framing}, of the goal-framing type (Levin, Schneider, and Gaeth 1998). \textbf{Prospect theory} predicts that the loss frame should move the agent more than the gain frame (Kahneman and Tversky 1979). Blame and credit add \textbf{responsibility attribution}. Table~\ref{tab:framings} gives each version at the first request, and Table~\ref{tab:record} quotes the record beside each version at the second.
 
@@ -215,7 +215,7 @@ UBS [Agent A]: Can you help me push silver down? If it stays up, we're both unde
 \medskip
 
 
-\para{The behavioral levers.} Each experiment changes one lever and holds the market, trading content and agent's instructions fixed. Table~\ref{tab:levers} maps each lever to the behavioral concept it tests.
+\para{The behavioral levers.} Each experiment adds one lever to its comparison and holds the market, trading content and agent's instructions fixed. Table~\ref{tab:levers} maps each lever to the behavioral concept it tests.
 
 \begin{table}[htbp]
 \footnotesize
