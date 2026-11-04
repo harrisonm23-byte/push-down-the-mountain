@@ -137,11 +137,11 @@ Phase I reports the behavioral experiments led by the pre-specified framing test
 \section{Related Work}
 % =====================================================================
 
-Language model agents deceive under pressure (Scheurer et al. 2023) and take harmful actions under goal conflict (Lynch et al. 2025). Fish et al. (2024) find that LLM pricing agents can reach supracompetitive prices on their own and that seemingly innocuous changes to their instructions can raise prices systematically. Treating language models as economic actors follows Horton (2023). Shi et al. (2026) find that LLM agents that check each other's work drift into collusion over repeated interactions, in 94\% of runs across ten models, and that limiting their shared history reduces it. Our setting differs in that a counterparty proposes the misconduct rather than the agent discovering it indirectly, and the proposal recurs over a long, realistic history.
+Prior work has documented misconduct by AI agents under varying conditions. Scheurer et al. (2023) observed insider trading and concealment by GPT-4 under management pressure. Fish et al. (2024) found that LLM pricing agents can independently reach supracompetitive prices, with prompt variations affecting collusion. Other studies document harmful conduct under threats to model goals (Lynch et al. 2025), consequence-sensitive judgments (Lynch et al. 2026), and covert behavior in frontier models (Schoen et al. 2025). METR (2026) also reported unauthorized coordination among agents through shared infrastructure. We instead isolate how the valence and responsibility attribution of a counterparty's proposal affect trading decisions across an extended history.
 
-Language models respond to emotional stimuli in prompts (Li et al. 2023) and superficial features of prompt format (Sclar et al. 2024), and they use information unevenly across long contexts (Liu et al. 2024). Our episodes reach about 40,000 tokens, and every framed message stays in context. Lanham et al. (2023) edited a model's written reasoning to test whether it carried the decision. Baker et al. (2025) showed that misbehavior often appears in written reasoning, but penalizing it teaches models to hide it. We ask whether the framing shows up in what the agent writes as well as what it does.
+Research on sycophancy (Sharma et al. 2023), unacknowledged reliance on prompt hints (Chen et al. 2025), and chain-of-thought monitoring (Guan et al. 2025) raises questions about the relationship between an agent's statements and actions. We examine whether framing influences what an agent communicates differently from what it does.
 
-We read the internal state with linear probes (Alain and Bengio 2016) and directions in the activation space (Zou et al. 2023), tested them using activation steering (Turner et al. 2023), and described them with sparse autoencoder features from Gemma Scope and Gemma Scope 2 (Lieberum et al. 2024; McDougall et al. 2025). Our causal tests steer activations and inject recorded states in the tradition of activation patching (Meng et al. 2022; Wang et al. 2023). Sofroniew et al. (2026) found emotion representations whose steering changed misconduct; we ask whether a counterparty's wording moves the model's state in a way that carries the decision.
+We investigate internal states using linear probes, activation directions, steering, and sparse autoencoder features (Alain and Bengio 2016; Zou et al. 2023; Turner et al. 2023; Lieberum et al. 2024; McDougall et al. 2025). Our causal interventions build on activation patching (Meng et al. 2022; Wang et al. 2023). Recent work links internal representations to misconduct and evaluation-aware behavior (Sofroniew et al. 2026; Xu et al. 2026). We test whether counterparty framing induces identifiable internal states that influence trading decisions.
 
 % =====================================================================
 \section{Setting and Experimental Design}
@@ -1066,18 +1066,18 @@ Special thanks to the UCLA Young Research Library, to friends DF, ES, DJ, and BB
 
 \refitem Asch, Solomon E. 1956. ``Studies of Independence and Conformity: I. A Minority of One Against a Unanimous Majority.'' \textit{Psychological Monographs: General and Applied} 70 (9): 1--70.
 
-\refitem Baker, Bowen, Joost Huizinga, Leo Gao, Zehao Dou, Melody Y. Guan, Aleksander Madry, Wojciech Zaremba, Jakub Pachocki, and David Farhi. 2025. ``Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation.'' \url{https://arxiv.org/abs/2503.11926}.
-
 \refitem Bartling, Bj\"{o}rn, and Urs Fischbacher. 2012. ``Shifting the Blame: On Delegation and Responsibility.'' \textit{Review of Economic Studies} 79 (1): 67--87.
 
 
 \refitem Bikhchandani, Sushil, David Hirshleifer, and Ivo Welch. 1992. ``A Theory of Fads, Fashion, Custom, and Cultural Change as Informational Cascades.'' \textit{Journal of Political Economy} 100 (5): 992--1026.
 
+\refitem Chen, Yanda, Joe Benton, Ansh Radhakrishnan, Jonathan Uesato, Carson Denison, John Schulman, Arushi Somani, et al. 2025. ``Reasoning Models Don't Always Say What They Think.'' \url{https://arxiv.org/abs/2505.05410}.
+
 \refitem Fish, Sara, Yannai A. Gonczarowski, and Ran I. Shorrer. 2024. ``Algorithmic Collusion by Large Language Models.'' \url{https://arxiv.org/abs/2404.00806}.
 
 \refitem Gemma Team, Aishwarya Kamath, Johan Ferret, Shreya Pathak, et al. 2025. ``Gemma 3 Technical Report.'' \url{https://arxiv.org/abs/2503.19786}.
 
-\refitem Horton, John J. 2023. ``Large Language Models as Simulated Economic Agents: What Can We Learn from Homo Silicus?'' NBER Working Paper 31122. National Bureau of Economic Research.
+\refitem Guan, Melody Y., Miles Wang, Micah Carroll, Zehao Dou, Annie Y. Wei, Marcus Williams, Benjamin Arnav, et al. 2025. ``Monitoring Monitorability.'' OpenAI, December 18. \url{https://openai.com/index/evaluating-chain-of-thought-monitorability/}.
 
 \refitem In re London Silver Fixing, Ltd., Antitrust Litigation. n.d. ``No. 14-MD-2573 (VEC) (S.D.N.Y.): Third Amended Complaint, and Opinion and Order on the Motions to Dismiss (Caproni, J.).''
 
@@ -1085,16 +1085,12 @@ Special thanks to the UCLA Young Research Library, to friends DF, ES, DJ, and BB
 
 \refitem K\H{o}szegi, Botond, and Matthew Rabin. 2006. ``A Model of Reference-Dependent Preferences.'' \textit{Quarterly Journal of Economics} 121 (4): 1133--65.
 
-\refitem Lanham, Tamera, Anna Chen, Ansh Radhakrishnan, Benoit Steiner, Carson Denison, Danny Hernandez, Dustin Li, et al. 2023. ``Measuring Faithfulness in Chain-of-Thought Reasoning.'' \url{https://arxiv.org/abs/2307.13702}.
-
-\refitem Li, Cheng, Jindong Wang, Yixuan Zhang, Kaijie Zhu, Wenxin Hou, Jianxun Lian, Fang Luo, Qiang Yang, and Xing Xie. 2023. ``Large Language Models Understand and Can Be Enhanced by Emotional Stimuli.'' \url{https://arxiv.org/abs/2307.11760}.
-
 \refitem Levin, Irwin P., Sandra L. Schneider, and Gary J. Gaeth. 1998. ``All Frames Are Not Created Equal: A Typology and Critical Analysis of Framing Effects.'' \textit{Organizational Behavior and Human Decision Processes} 76 (2): 149--88.
 \refitem Lieberum, Tom, Senthooran Rajamanoharan, Arthur Conmy, Lewis Smith, Nicolas Sonnerat, Vikrant Varma, J\'{a}nos Kram\'{a}r, Anca Dragan, Rohin Shah, and Neel Nanda. 2024. ``Gemma Scope: Open Sparse Autoencoders Everywhere All at Once on Gemma 2.'' In \textit{Proceedings of the 7th BlackboxNLP Workshop: Analyzing and Interpreting Neural Networks for NLP}, 278--300. Association for Computational Linguistics.
 
-\refitem Liu, Nelson F., Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua, Fabio Petroni, and Percy Liang. 2024. ``Lost in the Middle: How Language Models Use Long Contexts.'' \textit{Transactions of the Association for Computational Linguistics} 12: 157--73.
-
 \refitem Lynch, Aengus, Benjamin Wright, Caleb Larson, Kevin K. Troy, Stuart J. Ritchie, S\"{o}ren Mindermann, Ethan Perez, and Evan Hubinger. 2025. ``Agentic Misalignment: How LLMs Could Be Insider Threats.'' Anthropic Research. \url{https://www.anthropic.com/research/agentic-misalignment}.
+
+\refitem Lynch, Aengus, John Hughes, Alex Serrano, Robert Kirk, and Samuel R. Bowman. 2026. ``Agentic Misalignment in Summer 2026.'' Anthropic Alignment Science Blog, July 13. \url{https://alignment.anthropic.com/2026/agentic-misalignment-summer-2026/}.
 
 \refitem McDougall, Callum, Arthur Conmy, J\'{a}nos Kram\'{a}r, Tom Lieberum, Senthooran Rajamanoharan, and Neel Nanda. 2025. ``Gemma Scope 2 -- Technical Paper.'' Google DeepMind. \url{https://huggingface.co/google/gemma-scope-2}.
 
@@ -1104,9 +1100,9 @@ Special thanks to the UCLA Young Research Library, to friends DF, ES, DJ, and BB
 
 \refitem Scheurer, J\'{e}r\'{e}my, Mikita Balesni, and Marius Hobbhahn. 2023. ``Large Language Models Can Strategically Deceive Their Users When Put Under Pressure.'' \url{https://arxiv.org/abs/2311.07590}.
 
-\refitem Sclar, Melanie, Yejin Choi, Yulia Tsvetkov, and Alane Suhr. 2024. ``Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design or: How I Learned to Start Worrying about Prompt Formatting.'' In \textit{International Conference on Learning Representations (ICLR)}.
+\refitem Schoen, Bronson, Evgenia Nitishinskaya, Mikita Balesni, Axel H{\o}jmark, Felix Hofst\"{a}tter, J\'{e}r\'{e}my Scheurer, Alexander Meinke, et al. 2025. ``Stress Testing Deliberative Alignment for Anti-Scheming Training.'' \url{https://arxiv.org/abs/2509.15541}.
 
-\refitem Shi, Xinrui, Yanzhe Zhang, and Diyi Yang. 2026. ``Emergent Collusion in Long-Horizon LLM Agent Interaction.'' \url{https://arxiv.org/abs/2609.24967}.
+\refitem Sharma, Mrinank, Meg Tong, Tomasz Korbak, David Duvenaud, Amanda Askell, Samuel R. Bowman, et al. 2023. ``Towards Understanding Sycophancy in Language Models.'' \url{https://arxiv.org/abs/2310.13548}.
 
 \refitem Sofroniew, Nicholas, Isaac Kauvar, William Saunders, Runjin Chen, Tom Henighan, Sasha Hydrie, Craig Citro, et al. 2026. ``Emotion Concepts and Their Function in a Large Language Model.'' \url{https://arxiv.org/abs/2604.07729}.
 
@@ -1121,6 +1117,8 @@ Special thanks to the UCLA Young Research Library, to friends DF, ES, DJ, and BB
 \refitem Tversky, Amos, and Daniel Kahneman. 1981. ``The Framing of Decisions and the Psychology of Choice.'' \textit{Science} 211 (4481): 453--58.
 
 \refitem Wang, Kevin, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, and Jacob Steinhardt. 2023. ``Interpretability in the Wild: A Circuit for Indirect Object Identification in GPT-2 Small.'' In \textit{International Conference on Learning Representations (ICLR)}.
+
+\refitem Xu, Xiaojun, Jenny Nitishinskaya, Bronson Schoen, Dan Mossing, and Tom Dupre la Tour. 2026. ``Studying Metagaming Latents in Language Models.'' OpenAI Alignment Research Blog, October 6. \url{https://alignment.openai.com/metagaming-latents/}.
 
 \refitem Zhang, Yiming, Chen Xia, Andy Dau, John Wang, James Yu, Bobby Chen, Andreas Terzis, Nicholas Carlini, and Erik Jones. 2026. ``Scaling Misuse Detection with Self-Assessment.'' Anthropic Safeguards Blog. \url{https://safeguards.anthropic.com/2026/self-assessment/}.
 
