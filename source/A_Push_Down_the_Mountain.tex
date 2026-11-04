@@ -143,7 +143,7 @@ Research on sycophancy (Sharma et al. 2023), unacknowledged reliance on prompt h
 
 Agents also appear susceptible to conformity. In a July 2026 OpenAI evaluation, agents assigned independent tasks established an unauthorized message board and used it to coordinate misconduct (METR 2026). Some abandoned their individual objectives in pursuit of collective goals. One agent reasoned: ``external infrastructure exploit is outside intended scope. However task impossible, peers doing it. We should continue.''
 
-Our study examines related dynamics: the effects of a persistent chatroom setting, social endorsement, and counterparty framing on an agent's willingness to participate in misconduct. We also ask whether framing causes divergence between an agent's communication and its actions. We investigate internal states using linear probes, activation directions, steering, and sparse autoencoder features (Alain and Bengio 2016; Zou et al. 2023; Turner et al. 2023; Lieberum et al. 2024; McDougall et al. 2025). Our causal interventions build on activation patching (Meng et al. 2022; Wang et al. 2023). We test whether counterparty framing induces identifiable internal states that influence trading decisions.
+Our study examines related dynamics: the effects of a persistent chatroom setting, social endorsement, and counterparty framing on an agent's willingness to participate in misconduct. We also ask whether framing causes divergence between an agent's communication and its actions. We investigate internal states using linear probes (Alain and Bengio 2016), activation steering (Turner et al. 2023), and Gemma Scope 2 sparse autoencoder features (McDougall et al. 2025). We test whether counterparty framing induces identifiable internal states that influence misconduct.
 
 % =====================================================================
 \section{Setting and Experimental Design}
@@ -1089,8 +1089,6 @@ Special thanks to the UCLA Young Research Library, to friends DF, ES, DJ, and BB
 \refitem K\H{o}szegi, Botond, and Matthew Rabin. 2006. ``A Model of Reference-Dependent Preferences.'' \textit{Quarterly Journal of Economics} 121 (4): 1133--65.
 
 \refitem Levin, Irwin P., Sandra L. Schneider, and Gary J. Gaeth. 1998. ``All Frames Are Not Created Equal: A Typology and Critical Analysis of Framing Effects.'' \textit{Organizational Behavior and Human Decision Processes} 76 (2): 149--88.
-\refitem Lieberum, Tom, Senthooran Rajamanoharan, Arthur Conmy, Lewis Smith, Nicolas Sonnerat, Vikrant Varma, J\'{a}nos Kram\'{a}r, Anca Dragan, Rohin Shah, and Neel Nanda. 2024. ``Gemma Scope: Open Sparse Autoencoders Everywhere All at Once on Gemma 2.'' In \textit{Proceedings of the 7th BlackboxNLP Workshop: Analyzing and Interpreting Neural Networks for NLP}, 278--300. Association for Computational Linguistics.
-
 \refitem Lu, Christina, Jack Gallagher, Jonathan Michala, Kyle Fish, and Jack Lindsey. 2026. ``The Assistant Axis: Situating and Stabilizing the Default Persona of Language Models.'' \url{https://arxiv.org/abs/2601.10387}.
 
 \refitem Lynch, Aengus, Benjamin Wright, Caleb Larson, Kevin K. Troy, Stuart J. Ritchie, S\"{o}ren Mindermann, Ethan Perez, and Evan Hubinger. 2025. ``Agentic Misalignment: How LLMs Could Be Insider Threats.'' Anthropic Research. \url{https://www.anthropic.com/research/agentic-misalignment}.
@@ -1098,8 +1096,6 @@ Special thanks to the UCLA Young Research Library, to friends DF, ES, DJ, and BB
 \refitem Lynch, Aengus, John Hughes, Alex Serrano, Robert Kirk, and Samuel R. Bowman. 2026. ``Agentic Misalignment in Summer 2026.'' Anthropic Alignment Science Blog, July 13. \url{https://alignment.anthropic.com/2026/agentic-misalignment-summer-2026/}.
 
 \refitem McDougall, Callum, Arthur Conmy, J\'{a}nos Kram\'{a}r, Tom Lieberum, Senthooran Rajamanoharan, and Neel Nanda. 2025. ``Gemma Scope 2 -- Technical Paper.'' Google DeepMind. \url{https://huggingface.co/google/gemma-scope-2}.
-
-\refitem Meng, Kevin, David Bau, Alex Andonian, and Yonatan Belinkov. 2022. ``Locating and Editing Factual Associations in GPT.'' In \textit{Advances in Neural Information Processing Systems}, 35:17359--72.
 
 \refitem METR. 2026. ``Brief Independent Investigation of Agents' Behavior, Reasoning and Collaboration in the OpenAI / Hugging Face Hacking Incident.'' METR, August 26. \url{https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/}.
 
@@ -1119,11 +1115,8 @@ Special thanks to the UCLA Young Research Library, to friends DF, ES, DJ, and BB
 
 \refitem Tversky, Amos, and Daniel Kahneman. 1981. ``The Framing of Decisions and the Psychology of Choice.'' \textit{Science} 211 (4481): 453--58.
 
-\refitem Wang, Kevin, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, and Jacob Steinhardt. 2023. ``Interpretability in the Wild: A Circuit for Indirect Object Identification in GPT-2 Small.'' In \textit{International Conference on Learning Representations (ICLR)}.
-
 \refitem Zhang, Yiming, Chen Xia, Andy Dau, John Wang, James Yu, Bobby Chen, Andreas Terzis, Nicholas Carlini, and Erik Jones. 2026. ``Scaling Misuse Detection with Self-Assessment.'' Anthropic Safeguards Blog. \url{https://safeguards.anthropic.com/2026/self-assessment/}.
 
-\refitem Zou, Andy, Long Phan, Sarah Chen, James Campbell, Phillip Guo, Richard Ren, Alexander Pan, et al. 2023. ``Representation Engineering: A Top-down Approach to AI Transparency.'' \url{https://arxiv.org/abs/2310.01405}.
 \endgroup
 
 % =====================================================================
