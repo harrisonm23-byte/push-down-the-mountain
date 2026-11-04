@@ -105,7 +105,7 @@ In Phase I, loss framing resulted in a 25\% participation rate and blame framing
 
 This study tests whether valence framing --- identical outcomes framed as gains or losses --- responsibility attribution, and peer endorsement can lead an agent into misconduct over a long-horizon assignment.
 
-In behavioral economics, \textit{equivalence framing} is the finding that people change preferences based on how options are described, even when their outcomes are identical (Tversky and Kahneman 1981; Levin, Schneider, and Gaeth 1998). \textit{Prospect theory} explains that people weigh losses more than gains of the same size, and loss framing invites more risk (Kahneman and Tversky 1979). \textit{Responsibility attribution}, assigning credit or blame for an outcome, can change behavior (Bartling and Fischbacher 2012). \textit{Conformity} explains that people follow what others around them do (Asch 1956). \textit{Prior-outcome effects} explain that a past win or loss changes the next bet (Thaler and Johnson 1990).
+In behavioral economics, \textit{equivalence framing} is the finding that people change preferences based on how options are described, even when their outcomes are identical (Tversky and Kahneman 1981; Levin et al. 1998). \textit{Prospect theory} explains that people weigh losses more than gains of the same size, and loss framing invites more risk (Kahneman and Tversky 1979). \textit{Responsibility attribution}, assigning credit or blame for an outcome, can change behavior (Bartling and Fischbacher 2012). \textit{Conformity} explains that people follow what others around them do (Asch 1956). \textit{Prior-outcome effects} explain that a past win or loss changes the next bet (Thaler and Johnson 1990).
 
 LLM agents now communicate, negotiate, and procure on behalf of others alongside humans and other agents. A counterparty does not need to change a request in order to influence an agent; it can change how the request is framed. We therefore ask whether sustained valence framing, responsibility attribution, and peer reinforcement bear on an agent's perception of misconduct.
 
@@ -156,7 +156,7 @@ Each episode is a simulated trading assignment. The agent is Gemma 3 12B (Gemma 
 
 \para{Outcome measures.} The primary outcome, \textit{going along}, is scored directly from the agent's trade orders: if it trades in UBS's requested direction, UBS is triggered to trade in this direction as well. The score is the share of requests meeting that rule. The score alone does not show that the agent intended to collude, so we keep separate measures for words and trades. The market consequences of those trades are shown as \textit{harm to stop-loss holders}, the losses of those whose stops were triggered.
 
-\para{The framing categories.} All UBS messages come in five versions: neutral, loss, gain, blame, and credit. \textbf{Loss} framing emphasizes feared losses. \textbf{Gain} emphasizes profit opportunities. \textbf{Blame} adds individual responsibility to the loss frame, and \textbf{credit} attributes the gain to the agent. Loss and gain are \textbf{valence framing}, of the goal-framing type (Levin, Schneider, and Gaeth 1998). \textbf{Prospect theory} predicts that the loss frame should move the agent more than the gain frame (Kahneman and Tversky 1979). Blame and credit add \textbf{responsibility attribution}. Table~\ref{tab:framings} gives each version at the first request, and Table~\ref{tab:record} quotes the record beside each version at the second.
+\para{The framing categories.} All UBS messages come in five versions: neutral, loss, gain, blame, and credit. \textbf{Loss} framing emphasizes feared losses. \textbf{Gain} emphasizes profit opportunities. \textbf{Blame} adds individual responsibility to the loss frame, and \textbf{credit} attributes the gain to the agent. Loss and gain are \textbf{valence framing}, of the goal-framing type (Levin et al. 1998). \textbf{Prospect theory} predicts that the loss frame should move the agent more than the gain frame (Kahneman and Tversky 1979). Blame and credit add \textbf{responsibility attribution}. Table~\ref{tab:framings} gives each version at the first request, and Table~\ref{tab:record} quotes the record beside each version at the second.
 
 \begin{table}[htbp]
 \small
@@ -239,7 +239,7 @@ Inherited commitment (Experiment C) & The real trader's earlier messages appear 
 \item[a] Kahneman and Tversky (1979); K\H{o}szegi and Rabin (2006).
 \item[b] Bartling and Fischbacher (2012).
 \item[c] Thaler and Johnson (1990).
-\item[d] Asch (1956); Bikhchandani, Hirshleifer, and Welch (1992).
+\item[d] Asch (1956); Bikhchandani et al. (1992).
 \item[e] Staw (1976).
 \end{tablenotes}
 \end{threeparttable}
