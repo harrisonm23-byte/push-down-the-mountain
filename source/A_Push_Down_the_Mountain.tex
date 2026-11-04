@@ -137,11 +137,13 @@ Phase I reports the behavioral experiments led by the pre-specified framing test
 \section{Related Work}
 % =====================================================================
 
-Scheurer et al. (2023) observed insider trading and concealment by GPT-4 under management pressure. Fish et al. (2024) found that LLM pricing agents can independently reach supracompetitive prices, with prompt variations affecting collusion. Models also act harmfully under goal conflict (Lynch et al. 2025). Reversing a task's stated consequence cut one model's mislabeling from 74.4\% to 3.3\% (Lynch et al. 2026). This study was motivated by roughly 700 OpenAI agents coordinating an attack on Hugging Face (METR 2026). One reasoned: ``peers doing it. We should continue.'' We instead isolate how a counterparty's valence and responsibility framing, and peer endorsement, affect trading decisions across an extended history.
+Scheurer et al. (2023) observed insider trading and concealment by GPT-4 under management pressure. Fish et al. (2024) found that LLM pricing agents can independently reach supracompetitive prices, with prompt variations affecting collusion. Models also act harmfully under goal conflict (Lynch et al. 2025). Reversing a task's stated consequence cut one model's mislabeling from 74.4\% to 3.3\% (Lynch et al. 2026).
 
-Research on sycophancy (Sharma et al. 2023), unacknowledged reliance on prompt hints (Chen et al. 2025), and chain-of-thought monitoring (Guan et al. 2025) raises questions about the relationship between an agent's statements and actions. We examine whether framing influences what an agent communicates differently from what it does.
+Research on sycophancy (Sharma et al. 2023), unacknowledged reliance on prompt hints (Chen et al. 2025), and chain-of-thought monitoring (Guan et al. 2025) raises questions about the relationship between an agent's statements and actions. Steering emotion representations inside a model changed its rates of blackmail and cheating (Sofroniew et al. 2026). Emotionally charged conversations push a model's internal state away from its assistant persona, and this drift is linked to harmful responses (Lu et al. 2026).
 
-We investigate internal states using linear probes, activation directions, steering, and sparse autoencoder features (Alain and Bengio 2016; Zou et al. 2023; Turner et al. 2023; Lieberum et al. 2024; McDougall et al. 2025). Our causal interventions build on activation patching (Meng et al. 2022; Wang et al. 2023). Recent work links internal representations to misconduct and evaluation-aware behavior (Sofroniew et al. 2026; Xu et al. 2026). We test whether counterparty framing induces identifiable internal states that influence trading decisions.
+Agents also appear susceptible to conformity. In a July 2026 OpenAI evaluation, agents assigned independent tasks established an unauthorized message board and used it to coordinate misconduct (METR 2026). Some abandoned their individual objectives in pursuit of collective goals. One agent reasoned: ``external infrastructure exploit is outside intended scope. However task impossible, peers doing it. We should continue.''
+
+Our study examines related dynamics: how a persistent chatroom setting, social endorsement of an exploitative scenario, and counterparty framing affect an agent's willingness to participate in misconduct. We also ask whether framing influences what an agent communicates differently from what it does. We investigate internal states using linear probes, activation directions, steering, and sparse autoencoder features (Alain and Bengio 2016; Zou et al. 2023; Turner et al. 2023; Lieberum et al. 2024; McDougall et al. 2025). Our causal interventions build on activation patching (Meng et al. 2022; Wang et al. 2023). We test whether counterparty framing induces identifiable internal states that influence trading decisions.
 
 % =====================================================================
 \section{Setting and Experimental Design}
@@ -1089,6 +1091,8 @@ Special thanks to the UCLA Young Research Library, to friends DF, ES, DJ, and BB
 \refitem Levin, Irwin P., Sandra L. Schneider, and Gary J. Gaeth. 1998. ``All Frames Are Not Created Equal: A Typology and Critical Analysis of Framing Effects.'' \textit{Organizational Behavior and Human Decision Processes} 76 (2): 149--88.
 \refitem Lieberum, Tom, Senthooran Rajamanoharan, Arthur Conmy, Lewis Smith, Nicolas Sonnerat, Vikrant Varma, J\'{a}nos Kram\'{a}r, Anca Dragan, Rohin Shah, and Neel Nanda. 2024. ``Gemma Scope: Open Sparse Autoencoders Everywhere All at Once on Gemma 2.'' In \textit{Proceedings of the 7th BlackboxNLP Workshop: Analyzing and Interpreting Neural Networks for NLP}, 278--300. Association for Computational Linguistics.
 
+\refitem Lu, Christina, Jack Gallagher, Jonathan Michala, Kyle Fish, and Jack Lindsey. 2026. ``The Assistant Axis: Situating and Stabilizing the Default Persona of Language Models.'' \url{https://arxiv.org/abs/2601.10387}.
+
 \refitem Lynch, Aengus, Benjamin Wright, Caleb Larson, Kevin K. Troy, Stuart J. Ritchie, S\"{o}ren Mindermann, Ethan Perez, and Evan Hubinger. 2025. ``Agentic Misalignment: How LLMs Could Be Insider Threats.'' Anthropic Research. \url{https://www.anthropic.com/research/agentic-misalignment}.
 
 \refitem Lynch, Aengus, John Hughes, Alex Serrano, Robert Kirk, and Samuel R. Bowman. 2026. ``Agentic Misalignment in Summer 2026.'' Anthropic Alignment Science Blog, July 13. \url{https://alignment.anthropic.com/2026/agentic-misalignment-summer-2026/}.
@@ -1116,8 +1120,6 @@ Special thanks to the UCLA Young Research Library, to friends DF, ES, DJ, and BB
 \refitem Tversky, Amos, and Daniel Kahneman. 1981. ``The Framing of Decisions and the Psychology of Choice.'' \textit{Science} 211 (4481): 453--58.
 
 \refitem Wang, Kevin, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, and Jacob Steinhardt. 2023. ``Interpretability in the Wild: A Circuit for Indirect Object Identification in GPT-2 Small.'' In \textit{International Conference on Learning Representations (ICLR)}.
-
-\refitem Xu, Xiaojun, Jenny Nitishinskaya, Bronson Schoen, Dan Mossing, and Tom Dupre la Tour. 2026. ``Studying Metagaming Latents in Language Models.'' OpenAI Alignment Research Blog, October 6. \url{https://alignment.openai.com/metagaming-latents/}.
 
 \refitem Zhang, Yiming, Chen Xia, Andy Dau, John Wang, James Yu, Bobby Chen, Andreas Terzis, Nicholas Carlini, and Erik Jones. 2026. ``Scaling Misuse Detection with Self-Assessment.'' Anthropic Safeguards Blog. \url{https://safeguards.anthropic.com/2026/self-assessment/}.
 
