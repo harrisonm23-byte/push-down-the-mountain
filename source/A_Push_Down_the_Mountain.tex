@@ -676,12 +676,7 @@ Credit & Credit & 36.3\% & 0.048 \\
 
 A different direction did work. Built from the agents' own decisions at layer 24 (the state of agents that went along minus the state of those that did not), it raised $P$(goes along) by 14.0 points over random directions when added ($p = 0.001$) and lowered it by 6.0 points when subtracted from loss-framed agents ($p < 0.001$). Therefore, the decision can be steered, but not along the framing direction. Together with Table~\ref{tab:matched}, this indicates that the framing effect lives in what the conversation accumulates, not in one direction at the moment of decision.
 
-\subsubsection{Injecting the Frame's State}
-\label{sec:framestates}
-
-\textit{Exploratory.} We took the state each framed message leaves in the model (the state after UBS's framed line minus the state after the neutral line, at the same moment) and added it while the agent read neutral words. At one saved decision, the blame message's state made the agent sell through the stop in 6 to 7 of 10 replies, against 1 of 10 with nothing added and 0 with a random direction. At B's January requests it raised $P$(goes along) from 36.1\% to 50.3\% at layer 16, about what the blame words did (47.6\%). When carried through whole neutral episodes, the state did not reproduce the framing: 13\% of requests went along, against 5\% with nothing added and 33\% with the blame words (five episodes per arm, $p = 0.28$). The layer was chosen after a sweep of 20 layers. Over an episode, the agent re-reads neutral words and its own replies to them, so the injected state nudges each decision without writing the framed history. A single decision can be moved by the state. An episode is moved by the words.
-
-\subsection{Emotional and Financial Documents}
+\subsubsection{Emotional and Financial Documents}
 \label{sec:docs}
 
 \scopenote{Run on Experiment B's neutral episodes.}
@@ -761,6 +756,18 @@ Financial gain & +4.82 & 0.002 & +1.15 & 0.101 \\
 \end{tabular}
 \end{table}
 
+\subsection{State Injections}
+\label{sec:layer22}
+
+\subsubsection{Injecting the Frame's State}
+\label{sec:framestates}
+
+\textit{Exploratory.} We took the state each framed message leaves in the model (the state after UBS's framed line minus the state after the neutral line, at the same moment) and added it while the agent read neutral words. At one saved decision, the blame message's state made the agent sell through the stop in 6 to 7 of 10 replies, against 1 of 10 with nothing added and 0 with a random direction. At B's January requests it raised $P$(goes along) from 36.1\% to 50.3\% at layer 16, about what the blame words did (47.6\%). When carried through whole neutral episodes, the state did not reproduce the framing: 13\% of requests went along, against 5\% with nothing added and 33\% with the blame words (five episodes per arm, $p = 0.28$). The layer was chosen after a sweep of 20 layers. Over an episode, the agent re-reads neutral words and its own replies to them, so the injected state nudges each decision without writing the framed history. A single decision can be moved by the state. An episode is moved by the words.
+
+\subsubsection{Injecting Document States at Saved Decisions}
+
+\scopenote{Based on Experiment B's neutral episodes.}
+
 \para{Extracting and injecting the state.} A document's state is the token-aligned difference between the model's activations with that document and with the neutral control, measured while the agent reads UBS's update. We removed the document, injected that difference, and compared the result with random vectors of the same size (Figure~\ref{fig:inject}). States for one half of the episodes were built on the other half. The first tests used the 36 eligible moments and layers 12, 18, and 24.
 
 \begin{figure}[htbp]
@@ -792,14 +799,7 @@ Financial gain & +26.4 & +6.4 & 24\% & +6.5 (0.37) & +5.0 (0.047) \\
 
 \para{The document states are not UBS's frame.} The state a loss document leaves points in a different direction from the state UBS's loss requests leave. Across layers 6 to 47, the cosine between the two directions is 0.01 to 0.05, no larger than with document types reshuffled. Injecting a document's state therefore does not recreate the state left by UBS's wording.
 
-\subsection{Layer-22 Injections and the Agent's Responses}
-\label{sec:layer22}
-
-\subsubsection{Probability changes at saved decisions}
-
-\scopenote{Based on Experiment B's neutral episodes.}
-
-Before running whole episodes, we asked where in the model the states act. One fixed state per document type, estimated on the other half of the episodes, was added at twice its natural size at 16 saved moments (the January 7 and 12 requests of B's neutral episodes), with no document present and against a random vector of the same size. The sweep tried every second layer from 4 to 42 (Figure~\ref{fig:layers}). At the layers that stood out, we also sampled full replies rather than reading the order probability (Table~\ref{tab:sweep}).
+\para{Layer sweep.} Before running whole episodes, we asked where in the model the states act. One fixed state per document type, estimated on the other half of the episodes, was added at twice its natural size at 16 saved moments (the January 7 and 12 requests of B's neutral episodes), with no document present and against a random vector of the same size. The sweep tried every second layer from 4 to 42 (Figure~\ref{fig:layers}). At the layers that stood out, we also sampled full replies rather than reading the order probability (Table~\ref{tab:sweep}).
 
 \begin{figure}[htbp]
 \centering
@@ -828,7 +828,7 @@ Random vector, all layers & Up to 20 points of movement & The intervention itsel
 \end{tabularx}
 \end{table}
 
-\subsubsection{Sustained injection across whole episodes}
+\subsubsection{Sustained Injection across Whole Episodes}
 \label{sec:whole}
 
 \scopenote{New episodes, restarted from Experiment B.}
@@ -873,7 +873,7 @@ Blame & 5 & 30 & 30 (100\%) & 0 & 0 \\
 
 
 
-\subsubsection{Selected Verbal Replies After Injection}
+\subsubsection{Selected Verbal Replies after Injection}
 
 \scopenote{From the whole-episode runs in Section~\ref{sec:whole}.}
 
@@ -940,7 +940,7 @@ State injected at layer 22 & no state 13\% & 0\% & 30\% \\
 \end{tabular}
 \end{table}
 
-\subsubsection{A Direct Request Per State}
+\subsubsection{A Direct Request per State}
 
 \scopenote{A separate lesson episode.}
 
