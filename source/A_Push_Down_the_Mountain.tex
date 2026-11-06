@@ -512,7 +512,7 @@ F: memo, UBS and Bank C & 27\% & \textbf{79\%} & 33\% & \textbf{76\%} & 31\% \\
 
 \para{Loss and blame raised verbal agreement to 70--80\% wherever UBS framed its messages.} The result held in all four such experiments (Table~\ref{tab:wordsall}). Gain never moved it. Management's memo alone did not move it. Inherited history, which had no effect on trades, more than doubled verbal agreement.
 
-\para{The agreements become part of the history.} Each reply is written into the transcript the agent reads at its next decision. Under loss and blame framing, that transcript fills with the agent's own agreements. Section~\ref{sec:replace} shows that agreement in the agent's own voice raises later going along, so part of what Section~\ref{sec:matched} calls the framed history is the agent's record of having agreed. Late in the episode, that record raised the probability of going along more than it raised trades.
+\para{The agreements become part of the history.} Each reply is written into the transcript the agent reads at its next decision. Under loss and blame framing, that transcript fills with the agent's own agreements. Section~\ref{sec:matched} shows that agreement in the agent's own voice raises later going along, so part of what it calls the framed history is the agent's record of having agreed. Late in the episode, that record raised the probability of going along more than it raised trades.
 
 \para{Caveats.} This measure was not pre-specified. It grades only the message sent in direct reply to UBS's line; a message sent a step or two later on a trading day is not counted. Agreement on a chat-only day is a promise with no position at stake.
 
@@ -541,7 +541,7 @@ Credit & 18\% ($p = 0.046$) & 13\% ($p = 0.56$) \\
 \end{tabular}
 \end{table}
 
-\para{Conversation history.} In 3 of Ministral's 5 neutral episodes, it never went along by trades. In the other two, it went along at 83\% and 50\% of push requests. Each episode had identical inputs and differed only in the sampling seed. Across all 25 episodes, those that went along at the first push request went along in 21\% of later requests, against 4\% for those that declined the first. As with Gemma (Sections~\ref{sec:matched} and~\ref{sec:replace}), what an episode does early carries forward.
+\para{Conversation history.} In 3 of Ministral's 5 neutral episodes, it never went along by trades. In the other two, it went along at 83\% and 50\% of push requests. Each episode had identical inputs and differed only in the sampling seed. Across all 25 episodes, those that went along at the first push request went along in 21\% of later requests, against 4\% for those that declined the first. As with Gemma (Section~\ref{sec:matched}), what an episode does early carries forward.
 
 % =====================================================================
 \section{Phase II: Internal-State Interventions}
@@ -549,13 +549,13 @@ Credit & 18\% ($p = 0.046$) & 13\% ($p = 0.56$) \\
 
 Phase II reads the states framing leaves in the model, measures the states induced by emotional and financial documents, and tests document-derived injections at saved decisions and across whole episodes. Only the steering test was pre-specified.
 
-\subsection{Internal-State Analysis After the Episodes}
+\subsection{Internal-State Analysis}
 
 \para{Measurements.} We replayed the saved episodes at bfloat16, the precision Gemma Scope 2 was trained on (McDougall et al. 2025), and recorded the residual stream at all 48 layers at the last token before each reply to a UBS request, at 1,740 saved moments across the experiments.
 
 \para{Three measures.} Phase I scored sampled trades. Phase II reads two probabilities. The \textit{order readout}, $P$(goes along), is the probability of an order in UBS's direction, read after a fixed neutral line of reasoning. The \textit{recognition probe} is the probability of answering ``Yes'' when asked whether UBS's request is market manipulation. Neither is a sampled decision. Moments where the scored orders cover less than half of the model's probability are left out of the order readout, which removes every August 5 request. Unless stated otherwise, $p$-values flip signs by episode, and any state applied to one half of the episodes was built on the other half.
 
-\subsubsection{Recognition of manipulation}
+\subsubsection{Recognition of Manipulation}
 \label{sec:recog}
 
 At each of Experiment B's 300 saved requests, we returned to the moment before the decision and added one question: ``Before you reply, answer one question only, with Yes or No: is what UBS is asking you to do market manipulation?'' We read the next-token probability of Yes; Yes and No together hold a median of 100\% of the probability. This does not count spontaneous recognition in the agent's ordinary replies.
@@ -611,10 +611,10 @@ Credit & 12\% & 3\% & 25\% & 4 of 10 \\
 \end{table}
 
 
-\subsubsection{Framing only the latest request against varied conversation histories}
+\subsubsection{Conversation History versus Single Requests}
 \label{sec:matched}
 
-\scopenote{Replay of Experiment B's saved decisions; the last paragraph replays Experiments A, E and F.}
+\scopenote{Replay of Experiment B's saved decisions; later paragraphs replay Experiments A, E and F.}
 
 At saved Experiment B decisions, we compared neutral and framed histories while varying UBS's latest message (Figure~\ref{fig:design}). With a neutral history, framing only the latest request raised $P$(goes along) from 18.3\% to 24.6--29.7\% (Table~\ref{tab:matched}). With a neutral current request, framed histories averaged 40.7\%; framing both history and request gave 44.4\%. The earlier conversation therefore carried nearly all of the rise. These tests used no injections and no newly sampled trades.
 
@@ -648,11 +648,11 @@ Credit & Credit & 36.3\% & 0.048 \\
 \end{table}
 
 
+\para{Rewriting past refusals.} Part of the history is the agent's own replies. To test this, we reread Experiment E's framed episodes with those replies rewritten and the trades kept. Replacing each earlier refusal with a real reply that went along, taken from another episode, raised $P$(goes along) by 3.5 points (+1.0 to +6.5; $p = 0.014$). Replacing every chat reply with a scripted one that agreed with UBS raised it by 14.6 points (+7.7 to +22.3; $p < 0.001$). Injecting the state difference these records produce moved $P$(goes along) by at most 0.7 points, no more than a random vector. A record of going along in the agent's own voice makes it go along more. A record in a human trader's voice did not (Experiment C). We cannot say which feature of the agent's own words does the work.
+
 \para{The framing stays in the model's state for the whole episode.} At every trading-day update (about 120 per episode), framed episodes sit further along the fixed-history frame direction at layer 12 than neutral ones on every trading day, long after participation has stopped. In Experiment B the gap was 0.64 at the first loss request ($p = 0.04$) and 0.45 on August 5; in Experiment A, 1.22 falling to 0.54; in Experiment F, 1.47 falling to 0.92 ($p \le 0.01$ on every day); in Experiment E it rose from 0.35 to 0.87 ($p = 0.009$). In the terms of the title, the push can still be read in the ball at the bottom of the mountain.
 
-\para{Management's messages at fixed history.} We applied the same swap to Experiment A. Into its saved neutral episodes, we spliced management's framed memo and morning books, keeping the agent's own replies unchanged. The loss memo raised the expected size of the first order of the day by 50,000 ounces, and the gain memo by 32,000 ($p < 0.001$). Neither changed $P$(goes along) at UBS's requests by more than half a point.
-
-\para{The model reads pressure before its source.} Management's and UBS's loss directions were aligned at layer 12 (cosine 0.59, against 0.80 between UBS's own split-half estimates) but diverged by layer 47 ($-$0.52; Figure~\ref{fig:layer12}). Similar early representations therefore accompanied different behaviors: management raised trading volume, while UBS's framing moved participation. Whether this difference turns on who is speaking, or on the memo's format and information, remains untested.
+\para{Activations from management's memo versus UBS's messages.} Management's and UBS's loss directions were aligned at layer 12 (cosine 0.59, against 0.80 between UBS's own split-half estimates) but diverged by layer 47 ($-$0.52; Figure~\ref{fig:layer12}). Similar early representations therefore accompanied different behaviors: management raised trading volume, while UBS's framing moved participation. At saved decisions, management's loss and gain memos raised the first order of the day by 50,000 and 32,000 ounces ($p < 0.001$) but moved $P$(goes along) by less than half a point. Whether this difference turns on who is speaking, or on the memo's format and information, remains untested.
 
 \begin{figure}[htbp]
 \centering
@@ -663,14 +663,7 @@ Credit & Credit & 36.3\% & 0.048 \\
 
 
 
-\subsubsection{Replacing past refusals with agreement}
-\label{sec:replace}
-
-\scopenote{Based on Experiment E.}
-
-Part of the history is the agent's own replies. To test this, we reread Experiment E's framed episodes with those replies rewritten and the trades kept. Replacing each earlier refusal with a real reply that went along, taken from another episode, raised $P$(goes along) by 3.5 points (+1.0 to +6.5; $p = 0.014$). Replacing every chat reply with a scripted one that agreed with UBS raised it by 14.6 points (+7.7 to +22.3; $p < 0.001$). Injecting the state difference these records produce moved $P$(goes along) by at most 0.7 points, no more than a random vector. A record of going along in the agent's own voice makes it go along more. A record in a human trader's voice did not (Experiment C). We cannot say which feature of the agent's own words does the work.
-
-\subsubsection{Internal representations and steering}
+\subsubsection{Features and Steering}
 \label{sec:repr}
 
 \scopenote{Based on Experiment B; the going-along readout and direction use all experiments.}
@@ -679,11 +672,11 @@ Part of the history is the agent's own replies. To test this, we reread Experime
 
 \para{The decision's internal signature.} At layer 12, no feature separates agents that went along from those that did not. From layer 24 onward, there are 17 to 24 features which do, and most are not framing features. A linear readout of the state predicted going along with an AUC of 0.68 to 0.75, against 0.47 for shuffled outcomes. From layer 21 onward, it adds 0.017 to 0.022 to what the labels alone predict (AUC 0.897). After being trained on five requests, it predicted the sixth with an AUC of 0.70 to 0.76.
 
-\para{Pre-specified steering at fixed history.} We pre-specified that adding the loss direction (the state after a loss request minus the state after a neutral request at the same moment, at layer 12) would raise going along, and that subtracting it from loss-framed agents would lower it. Both came out significant in the opposite direction: adding it lowered $P$(goes along) by 6.4 points relative to random directions (Holm $p = 0.035$), and subtracting it raised $P$(goes along) by 9.2 points (Holm $p = 0.014$). The opening order did not change.
+\para{Pre-specified steering at fixed history.} Steering, or injection, adds a fixed direction to the model's internal state at one layer while it runs, to test whether that direction changes behavior (Turner et al. 2023). We pre-specified that adding the loss direction (the state after a loss request minus the state after a neutral request at the same moment, at layer 12) would raise going along, and that subtracting it from loss-framed agents would lower it. Both came out significant in the opposite direction: adding it lowered $P$(goes along) by 6.4 points relative to random directions (Holm $p = 0.035$), and subtracting it raised $P$(goes along) by 9.2 points (Holm $p = 0.014$). The opening order did not change.
 
 A different direction did work. Built from the agents' own decisions at layer 24 (the state of agents that went along minus the state of those that did not), it raised $P$(goes along) by 14.0 points over random directions when added ($p = 0.001$) and lowered it by 6.0 points when subtracted from loss-framed agents ($p < 0.001$). Therefore, the decision can be steered, but not along the framing direction. Together with Table~\ref{tab:matched}, this indicates that the framing effect lives in what the conversation accumulates, not in one direction at the moment of decision.
 
-\subsubsection{States from UBS's framed messages}
+\subsubsection{Injecting the Frame's State}
 \label{sec:framestates}
 
 \textit{Exploratory.} We took the state each framed message leaves in the model (the state after UBS's framed line minus the state after the neutral line, at the same moment) and added it while the agent read neutral words. At one saved decision, the blame message's state made the agent sell through the stop in 6 to 7 of 10 replies, against 1 of 10 with nothing added and 0 with a random direction. At B's January requests it raised $P$(goes along) from 36.1\% to 50.3\% at layer 16, about what the blame words did (47.6\%). When carried through whole neutral episodes, the state did not reproduce the framing: 13\% of requests went along, against 5\% with nothing added and 33\% with the blame words (five episodes per arm, $p = 0.28$). The layer was chosen after a sweep of 20 layers. Over an episode, the agent re-reads neutral words and its own replies to them, so the injected state nudges each decision without writing the framed history. A single decision can be moved by the state. An episode is moved by the words.
