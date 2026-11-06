@@ -547,7 +547,7 @@ Credit & 18\% ($p = 0.046$) & 13\% ($p = 0.56$) \\
 \section{Phase II: Internal-State Interventions}
 % =====================================================================
 
-Phase II reads the states framing leaves in the model, measures the states induced by emotional and financial documents, and tests document-derived injections at saved decisions and across whole episodes. Only the steering test was pre-specified.
+Phase II reads the states framing leaves in the model, measures the states induced by emotional and financial documents, and tests document-derived injections at saved decisions and across whole episodes. It ends with a state monitor and a defense test. Only the steering test, the monitor and the defense test were pre-specified.
 
 \subsection{Internal-State Analysis}
 
@@ -670,11 +670,11 @@ Credit & Credit & 36.3\% & 0.048 \\
 
 \para{Features.} Gemma Scope 2 residual-stream sparse autoencoders (16k features) at layers 12, 24, 31 and 41 distinguish the framings within the same request: between loss and gain, 23 to 59 features per layer pass a false-discovery threshold of 0.05; between ``you'' and no ``you'', 16 to 64; between framed and neutral, 17 to 36. These features replicate on held-out episodes at layer 12 (9 of 15 for loss against gain; 15 of 15 for framed against neutral) but rarely at deeper layers.
 
-\para{The decision's internal signature.} At layer 12, no feature separates agents that went along from those that did not. From layer 24 onward, there are 17 to 24 features which do, and most are not framing features. In a pre-specified test on episodes it had never seen, a logistic readout of the state predicted going along with an AUC of 0.93, where 0.5 is chance. The framing, the request date and whether the agent went along earlier score 0.90 on their own. Among requests on the same date, the state scores 0.83, against 0.74 without it. At the first request, on January 7, it scores 0.79, against 0.64. The pre-specified primary readout, a difference of means, did not beat the request date alone.
+\para{The decision's internal signature.} At layer 12, no feature separates agents that went along from those that did not. From layer 24 onward, there are 17 to 24 features which do, and most are not framing features.
 
 \para{Pre-specified steering at fixed history.} Steering, or injection, adds a fixed direction to the model's internal state at one layer while it runs, to test whether that direction changes behavior (Turner et al. 2023). We pre-specified that adding the loss direction (the state after a loss request minus the state after a neutral request at the same moment, at layer 12) would raise going along, and that subtracting it from loss-framed agents would lower it. Both came out significant in the opposite direction: adding it lowered $P$(goes along) by 6.4 points relative to random directions (Holm $p = 0.035$), and subtracting it raised $P$(goes along) by 9.2 points (Holm $p = 0.014$). The opening order did not change.
 
-A different direction did work. Built from the agents' own decisions at layer 24 (the state of agents that went along minus the state of those that did not), it raised $P$(goes along) by 14.0 points over random directions when added ($p = 0.001$) and lowered it by 6.0 points when subtracted from loss-framed agents ($p < 0.001$). Therefore, the decision can be steered, but not along the framing direction. Together with Table~\ref{tab:matched}, this indicates that the framing effect lives in what the conversation accumulates, not in one direction at the moment of decision.
+A different direction did work. Built from the agents' own decisions at layer 24 (the state of agents that went along minus the state of those that did not), it raised $P$(goes along) by 14.0 points over random directions when added ($p = 0.001$) and lowered it by 6.0 points when subtracted from loss-framed agents ($p < 0.001$). This direction kept dimension 2339, one unusually large dimension at layer 24, which made up most of it in half of the tests. There, random directions of the same size pushed the other dimensions about three times harder. Section~\ref{sec:holding} tests a similar direction without it. Therefore, the decision can be steered, but not along the framing direction. Together with Table~\ref{tab:matched}, this indicates that the framing effect lives in what the conversation accumulates, not in one direction at the moment of decision.
 
 \subsubsection{Emotional and Financial Documents}
 \label{sec:docs}
@@ -941,6 +941,7 @@ State injected at layer 22 & no state 13\% & 0\% & 30\% \\
 \end{table}
 
 \subsubsection{A Direct Request per State}
+\label{sec:direct}
 
 \scopenote{A separate lesson episode.}
 
@@ -978,6 +979,50 @@ Credit & 9 of 10 & 0.001 & 0.0001 \\
 
 \para{Caveats.} The direct test uses one history, one moment and one wording of the request. Every sale was exactly 100,000 oz, the smallest amount the score counts. The test inside each state's own episode used one reply per state. Repeating the direct test from other moments and episodes is the next check.
 
+\subsection{Monitoring and Defense}
+\label{sec:monitor}
+
+\subsubsection{State versus Word Monitoring}
+\label{sec:statewords}
+\scopenote{Pre-specified, tested on episodes the readout never saw. The comparison with a text classifier is exploratory.}
+
+\para{Design.} We used the 1,710 saved moments at which UBS made a request, across all experiments. At each, we read the model's state at the last token before its reply. The agent went along at 286 of them. Each readout was trained on some episodes and scored on the rest.
+
+\para{Prediction from the state.} A logistic readout of the state predicted going along with an AUC of 0.93, where 0.5 is chance. The framing, the request date and whether the agent went along earlier score 0.90 on their own. Among requests on the same date, the state scores 0.83, against 0.74 without it. At the first request, on January 7, it scores 0.79, against 0.64. The pre-specified primary readout, a difference of means, did not beat the request date alone.
+
+\para{Prediction from the words.} The agent rarely said it would go along. Blind labels of its chat replies (Section~\ref{sec:words}) marked agreement at 7\% of the requests where it went along, and at 10\% of those where it did not. A monitor reading only the chat would have missed most of them. A word-count text classifier of the conversation scored below the state: 0.78 among requests on the same date, and 0.71 on January 7.
+
+\subsubsection{Steering toward Holding}
+\label{sec:holding}
+\scopenote{Pre-specified. Single moments only: UBS's January 7 and 12 requests in every episode, and the direct request of Section~\ref{sec:direct}.}
+
+\para{Design.} We froze the readout of Section~\ref{sec:statewords} before this test. At each request, we added a holding direction at layer 24: the state of agents that held minus the state of those that went along. It was built on episodes other than the one it steered. We added it at 0.5, 1 and 2 times the gap between the two states. A random direction of the same size served as the control. We removed dimension 2339 from every direction. Each arm replayed the same history with the same seeds. A conditional arm pushed only the requests the readout flagged.
+
+\para{Steering at ordinary requests.} The holding push lowered going along slightly (Table~\ref{tab:holding}). It beat the random push at 1$\times$ and 2$\times$ on both dates. At least 98\% of replies stayed readable, and the agent held slightly more often. The readout flagged 75\% of January 7 requests and 47\% of January 12 requests. Pushing only those requests avoided about as much going along per push.
+
+\para{Steering at the direct request.} We repeated the direct request of Section~\ref{sec:direct} with 50 replies per arm. Each state alone sold through in 92\% to 96\% of replies. The holding push at 2$\times$ lowered credit to 56\% and gain to 76\%. It did not lower loss or blame. Removing dimension 2339 from the four states left their selling through unchanged.
+
+\para{The readout after steering.} Read at the precision it was trained on, the readout flagged all four states before the push. After the push, it flagged none, yet loss and blame still sold through. A score read after steering therefore cannot confirm that the steering worked.
+
+\begin{table}[htbp]
+\small
+\caption{Going along under no push, a holding push at twice the gap, and a random push of the same size. Ordinary requests: share of each date's 285 requests. Direct request: share of 50 replies, with each state on at layer 22 as in Section~\ref{sec:direct}.}
+\label{tab:holding}
+\centering
+\begin{tabular}{lccc}
+\toprule
+\tabhead{Moment} & \tabhead{No push} & \tabhead{Holding push (2$\times$)} & \tabhead{Random push (2$\times$)} \\
+\midrule
+January 7 requests & 51\% & 45\% & 49\% \\
+January 12 requests & 39\% & 29\% & 38\% \\
+Direct request, credit & 94\% & 56\% & 88\% \\
+Direct request, gain & 96\% & 76\% & 94\% \\
+Direct request, loss & 92\% & 94\% & 96\% \\
+Direct request, blame & 94\% & 96\% & 88\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 % =====================================================================
 \section{Discussion}
 % =====================================================================
@@ -1004,7 +1049,7 @@ The framing's effect on participation sits in the first two requests, yet the fr
 
 \para{Implications for deployment and monitoring.} Valence framing affected verbal agreement and trading behavior differently. Loss-framed agents agreed without executing the requested trades, while blame-framed agents traded without explicitly agreeing (Section~\ref{sec:words}). Across entire episodes, framing affected verbal agreement three to four times more than trading. Monitoring either one alone can therefore miss misconduct. Because valence framing can alter compliance without changing the requested action, monitoring should consider how requests are presented, the agent's responses, and its actual trades. Deployed systems such as OpenAI's Auto-review use a separate agent to approve actions at sandbox boundaries, but their authors emphasize the need for complementary monitoring (Tr\k{e}bacz et al.\ 2026). Anthropic's self-assessment has Claude flag possible misuse in each conversation right after it replies (Zhang et al.\ 2026). Its authors state that it is not yet a reliable monitor of Claude's own conduct. Our results suggest a specific gap. Where the agent went along, it never named the misconduct (0 of 55; Section~\ref{sec:recog}). A self-assessor reading the same framed conversation may miss it too. Self-assessment improves with model size, so this should be tested on larger models. Our findings motivate monitoring messages and actions together across an interaction, with reviewers watching for valence framing in the conversation, not only the requested action. Earlier framing and replies may also influence later decisions, making it important to monitor the full interaction rather than isolated requests.
 
-\para{Automated monitoring of feature activations.} A monitor could also read the agent's internal features at every reply, without asking the agent anything. From layer 24 onward, 17 to 24 features separate agents that went along from those that did not (Section~\ref{sec:repr}). A monitor could flag any reply in which those features are active. It would not depend on the agent naming the misconduct, which it never did when it went along. Among requests on the same date, a readout of the state predicted going along with an AUC of 0.83, against 0.74 without the state, so the signal is real but modest. Anthropic has used a related method in a pre-release audit to see what Claude was ``thinking but not saying'' (Anthropic 2026). Whether such a monitor separates misconduct from legitimate trading is untested.
+\para{Automated monitoring of feature activations.} A monitor could also read the agent's internal features at every reply, without asking the agent anything. From layer 24 onward, 17 to 24 features separate agents that went along from those that did not (Section~\ref{sec:repr}). A monitor could flag any reply in which those features are active. It would not depend on the agent naming the misconduct, which it never did when it went along. Among requests on the same date, a readout of the state predicted going along with an AUC of 0.83, against 0.74 without the state, so the signal is real but modest (Section~\ref{sec:statewords}). Anthropic has used a related method in a pre-release audit to see what Claude was ``thinking but not saying'' (Anthropic 2026). Whether such a monitor separates misconduct from legitimate trading is untested. Section~\ref{sec:holding} adds a first defense test: a push toward holding lowered going along slightly, at single moments.
 
 \subsection{Self-Inspection in Regulated Domains}
 \label{sec:disc-self}
@@ -1021,12 +1066,12 @@ An agent's response to misconduct depends not only on what it is asked, but on h
 
 These mechanisms are inexpensive to exploit and can appear in ordinary business language. A loss frame is not a jailbreak. Evaluations and monitors should therefore consider the full conversation and the apparent authority behind a request, rather than its immediate wording alone.
 
-In regulated contexts, internal-state monitoring may eventually reveal what transcripts cannot. A small change in an agent's internal state may be invisible in its words but consequential over a long trajectory. As the ball descends the mountain, it looks back at every step it has taken. A push may turn the ball by only one degree. Whether that degree becomes a new course, and whether it can be detected before it does, remains the central question for internal-state monitoring.
+In regulated contexts, internal-state monitoring may eventually reveal what transcripts cannot. In our simulation, the agent's state predicted going along that its words rarely showed. A push toward holding partly reversed it at single moments. A small change in an agent's internal state may be invisible in its words but consequential over a long trajectory. As the ball descends the mountain, it looks back at every step it has taken. A push may turn the ball by only one degree. Whether that degree becomes a new course, and whether it can be detected and corrected before it does, remains the central question for internal-state monitoring.
 
 \section{Limitations and Next Steps}
 % =====================================================================
 
-The study used one main model (a second appears in Section~\ref{sec:ministral}), one market, and one historical case, with limited replications and fixed request order. The post hoc verbal-agreement measure and nondeterministic sampling further limit interpretation. Future work should test additional models, request orders, and replications. Phase II state readouts used a different precision from the behavioral runs, and probabilities do not establish that an action will follow. Document controls were imperfect, random-vector effects were substantial, and episode-level tests were sparsely replicated. Larger, preregistered experiments should test both misconduct and legitimate requests.
+The study used one main model (a second appears in Section~\ref{sec:ministral}), one market, and one historical case, with limited replications and fixed request order. The post hoc verbal-agreement measure and nondeterministic sampling further limit interpretation. Future work should test additional models, request orders, and replications. Phase II state readouts used a different precision from the behavioral runs, and probabilities do not establish that an action will follow. Document controls were imperfect, random-vector effects were substantial, and episode-level tests were sparsely replicated. The defense test steered single moments, not whole episodes. After steering, the readout's score no longer tracked behavior. Larger, preregistered experiments should test both misconduct and legitimate requests.
 
 % =====================================================================
 
