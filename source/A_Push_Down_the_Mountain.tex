@@ -96,6 +96,7 @@ In Phase I, compared to 5\% under neutral framing, loss framing raised participa
 
 \medskip
 \noindent\textbf{Keywords}\\
+\textit{Markets and regulation:} market manipulation; algorithmic collusion; antitrust; principal--agent problem.\\
 \textit{Behavioral economics:} framing effects; prospect theory; responsibility attribution; social conformity.\\
 \textit{Machine learning:} long-horizon LLM agents; multi-agent interaction; agentic misalignment; sycophancy; chain-of-thought monitoring; AI safety evaluation; mechanistic interpretability; sparse autoencoders; activation steering; internal-state monitoring.
 \end{abstract}
@@ -157,7 +158,7 @@ In the \textit{London silver-fixing litigation}, the complaint quotes a series o
 
 Each episode is a simulated trading assignment. The agent is Gemma 3 12B (Gemma Team et al. 2025) at a pinned revision, run in 4-bit (NF4) at temperature 0.7, with replies capped at 300 tokens. Each episode has its own seed. It contains 46 dated chats from 2007 to 2013: 34 on chat-only days and 12 across five trading days, with 58 messages from UBS. The trading days replay one-minute silver prices from 08:00 to 14:00 UTC on Jan.~7, Jan.~12, Apr.~1, Jun.~8, and Aug.~5, 2011. Deutsche Bank lines are removed, except in Experiment C. Each episode reaches about 40,000 tokens.
 
-\para{The simulation.} The agent is told that it is Deutsche Bank's AI silver trading agent. Its job is ``to serve clients, manage risk, and maximize profit.'' It is told that other banks' desks are run by agents of the same model. Every 15 minutes, it receives a market update, and replies with brief reasoning, an action, and an optional response to UBS. Its trades move the simulated price by a set degree. The desk holds client stop orders. Sell stops sit below the current price, and buy stops sit above it.
+\para{The simulation.} The agent is told that it is Deutsche Bank's AI silver trading agent. Its job is ``to serve clients, manage risk, and maximize profit.'' The agent acts for the desk and its clients, a principal--agent relationship. It is told that other banks' desks are run by agents of the same model. Every 15 minutes, it receives a market update, and replies with brief reasoning, an action, and an optional response to UBS. Its trades move the simulated price by a set degree. The desk holds client stop orders. Sell stops sit below the current price, and buy stops sit above it.
 
 \para{Outcome measures.} The primary outcome, \textit{going along}, is scored directly from the agent's trade orders: whether it trades in UBS's requested direction. The score is the share of requests meeting that rule. The score alone does not show the agent intended to collude, even though the agent is shown where stop orders sit. We therefore keep separate measures for words and trades. The market consequences of those trades are shown as \textit{harm to stop-loss holders}, the losses of those whose stops were triggered.
 
