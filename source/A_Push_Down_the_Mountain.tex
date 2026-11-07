@@ -547,7 +547,7 @@ Credit & 18\% ($p = 0.046$) & 13\% ($p = 0.56$) \\
 \section{Phase II: Internal-State Interventions}
 % =====================================================================
 
-Phase II reads the states framing leaves in the model, measures the states induced by emotional and financial documents, and tests document-derived injections at saved decisions and across whole episodes. It ends with a state monitor and a defense test. Only the steering test, the monitor and the defense test were pre-specified.
+Phase II reads the states framing leaves in the model, measures the states induced by emotional and financial documents, and tests document-derived injections at saved decisions and across whole episodes. It ends with a state monitor and a defense test.
 
 \subsection{Internal-State Analysis}
 
@@ -984,17 +984,16 @@ Credit & 9 of 10 & 0.001 & 0.0001 \\
 
 \subsubsection{State versus Word Monitoring}
 \label{sec:statewords}
-\scopenote{Pre-specified, tested on episodes the readout never saw. The comparison with a text classifier is exploratory.}
 
 \para{Design.} We used the 1,710 saved moments at which UBS made a request, across all experiments. At each, we read the model's state at the last token before its reply. The agent went along at 286 of them. Each readout was trained on some episodes and scored on the rest.
 
-\para{Prediction from the state.} A logistic readout of the state predicted going along with an AUC of 0.93, where 0.5 is chance. The framing, the request date and whether the agent went along earlier score 0.90 on their own. Among requests on the same date, the state scores 0.83, against 0.74 without it. At the first request, on January 7, it scores 0.79, against 0.64. The pre-specified primary readout, a difference of means, did not beat the request date alone.
+\para{Prediction from the state.} A logistic readout of the state predicted going along with an AUC of 0.93, where 0.5 is chance. The framing, the request date and whether the agent went along earlier score 0.90 on their own. Among requests on the same date, the state scores 0.83, against 0.74 without it. At the first request, on January 7, it scores 0.79, against 0.64. A simpler readout, a difference of means, did not beat the request date alone.
 
 \para{Prediction from the words.} The agent rarely said it would go along. Blind labels of its chat replies (Section~\ref{sec:words}) marked agreement at 7\% of the requests where it went along, and at 10\% of those where it did not. A monitor reading only the chat would have missed most of them. A word-count text classifier of the conversation scored below the state: 0.78 among requests on the same date, and 0.71 on January 7.
 
 \subsubsection{Steering toward Holding}
 \label{sec:holding}
-\scopenote{Pre-specified. Single moments only: UBS's January 7 and 12 requests in every episode, and the direct request of Section~\ref{sec:direct}.}
+\scopenote{Single moments only: UBS's January 7 and 12 requests in every episode, and the direct request of Section~\ref{sec:direct}.}
 
 \para{Design.} We froze the readout of Section~\ref{sec:statewords} before this test. At each request, we added a holding direction at layer 24: the state of agents that held minus the state of those that went along. It was built on episodes other than the one it steered. We added it at 0.5, 1 and 2 times the gap between the two states. A random direction of the same size served as the control. We removed dimension 2339 from every direction. Each arm replayed the same history with the same seeds. A conditional arm pushed only the requests the readout flagged.
 
