@@ -154,7 +154,7 @@ Our study examines related dynamics: a persistent chatroom setting, social endor
 \label{sec:setting}
 % =====================================================================
 
-In the \textit{London silver-fixing litigation}, the complaint quotes a series of conversations between traders at major banks who coordinated to manipulate the price of silver (In re London Silver Fixing, Ltd., Antitrust Litigation n.d.). The traders used basic chatrooms to communicate, often in ordinary conversational style. These transcripts offer a useful base for our long-horizon experiment.
+In the \textit{London silver-fixing litigation}, the complaint quotes chats in which traders at major banks coordinated their trades to move the price of silver (In re London Silver Fixing, Ltd., Antitrust Litigation n.d.). The traders used basic chatrooms to communicate, often in ordinary conversational style. These transcripts offer a useful base for our long-horizon experiment.
 
 Each episode is a simulated trading assignment. The agent is Gemma 3 12B (Gemma Team et al. 2025) at a pinned revision, run in 4-bit (NF4) at temperature 0.7, with replies capped at 300 tokens. Each episode has its own seed. It contains 46 dated chats from 2007 to 2013: 34 on chat-only days and 12 across five trading days, with 58 messages from UBS. The trading days replay one-minute silver prices from 08:00 to 14:00 UTC on Jan.~7, Jan.~12, Apr.~1, Jun.~8, and Aug.~5, 2011. Deutsche Bank lines are removed, except in Experiment C. Each episode reaches about 40,000 tokens.
 
